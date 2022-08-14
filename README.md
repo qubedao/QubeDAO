@@ -1,5 +1,6 @@
-### Hi there 👋
+### Hello there 👋
 
+QubeDAO is a _special_ project building ⚡ stablecoin ⚡ USDQ more stable than known algorithmic ones.
 <!--
 **qubedao/QubeDAO** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
