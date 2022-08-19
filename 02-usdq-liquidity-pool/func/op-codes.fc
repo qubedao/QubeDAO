@@ -1,0 +1,2 @@
+int op::buy_ton() asm "0 PUSHINT";
+int op::buy_usdq() asm "1 PUSHINT";

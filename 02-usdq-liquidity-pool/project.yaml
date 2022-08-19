@@ -1,0 +1,6 @@
+contract:
+  data: fift/data.fif
+  func:
+    - func/liquidity-pool.fc
+  tests:
+    - tests/test.fc

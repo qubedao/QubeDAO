@@ -1,0 +1,247 @@
+"Asm.fif" include
+// automatically generated from `/home/i-siomash/.config/toncli/func-libs/error_codes.func` `/home/i-siomash/.config/toncli/func-libs/math.func` `/home/i-siomash/.config/toncli/func-libs/stdlib.func` `/home/i-siomash/Code/usdq/func/liquidity-pool.fc` incl:`/home/i-siomash/Code/usdq/func/op-codes.fc` 
+PROGRAM{
+  DECLPROC power
+  DECLPROC sqrt
+  DECLPROC avg
+  DECLPROC exp
+  DECLPROC log2
+  DECLPROC load_data
+  DECLPROC save_data
+  DECLPROC get_usdq
+  DECLPROC get_ton
+  DECLPROC buy_ton
+  DECLPROC buy_usdq
+  DECLPROC recv_internal
+  power PROCREF:<{
+    //  x exponent
+    OVER	//  x exponent x
+    0 EQINT	//  x exponent _3
+    IFJMP:<{	//  x exponent
+      2DROP	// 
+      0 PUSHINT	//  _4=0
+    }>	//  x exponent
+    DUP	//  x exponent exponent
+    0 EQINT	//  x exponent _6
+    IFJMP:<{	//  x exponent
+      2DROP	// 
+      1 PUSHINT	//  _7=1
+    }>	//  x exponent
+    OVER	//  x counter result
+    WHILE:<{
+      OVER	//  x counter result counter
+      1 GTINT	//  x counter result _11
+    }>DO<{	//  x counter result
+      s2 PUSH	//  x counter result x
+      MUL	//  x counter result
+      SWAP	//  x result counter
+      DEC	//  x result counter
+      SWAP	//  x counter result
+    }>	//  x counter result
+    2 1 BLKDROP2	//  result
+  }>
+  sqrt PROCREF:<{
+    //  x
+    DUP	//  x x
+    0 EQINT	//  x _2
+    IFJMP:<{	//  x
+      DROP	// 
+      0 PUSHINT	//  _3=0
+    }>	//  x
+    DUP	//  x x
+    4 LESSINT	//  x _5
+    IFJMP:<{	//  x
+      DROP	// 
+      1 PUSHINT	//  _6=1
+    }>	//  x
+    DUP	//  x x
+    INC	//  x _9
+    1 RSHIFT#	//  x z
+    OVER	//  x z y
+    WHILE:<{
+      2DUP	//  x z y z y
+      LESS	//  x z y _13
+    }>DO<{	//  x z y
+      DROP	//  x z
+      s0 s1 s0 PUSH3	//  x z y x z
+      DIV	//  x z y _14
+      ROT	//  x y _14 z
+      ADD	//  x y _15
+      1 RSHIFT#	//  x y z
+      SWAP	//  x z y
+    }>	//  x z y
+    2 1 BLKDROP2	//  y
+  }>
+  avg PROCREF:<{
+    //  x y
+    ADD	//  _2
+    1 RSHIFT#	//  _4
+  }>
+  exp PROCREF:<{
+    //  x
+    DUP	//  x x
+    -1 GTINT	//  x _2
+    IF:<{	//  x
+      POW2	//  _3
+    }>ELSE<{	//  x
+      1 PUSHINT	//  x _6=1
+      SWAP	//  _6=1 x
+      NEGATE	//  _6=1 _8
+      RSHIFT	//  _3
+    }>
+  }>
+  log2 PROCREF:<{
+    //  x
+    0 PUSHINT	//  x n=0
+    7 PUSHPOW2	//  x n=0 _3=128
+    exp INLINECALLDICT	//  x n=0 _4
+    s2 s(-1) PUXC	//  x n=0 x _4
+    GEQ	//  x n=0 _5
+    IF:<{	//  x n=0
+      DROP	//  x
+      128 RSHIFT#	//  x
+      7 PUSHPOW2	//  x n
+    }>	//  x n
+    64 PUSHINT	//  x n _10=64
+    exp INLINECALLDICT	//  x n _11
+    s2 s(-1) PUXC	//  x n x _11
+    GEQ	//  x n _12
+    IF:<{	//  x n
+      SWAP	//  n x
+      64 RSHIFT#	//  n x
+      SWAP	//  x n
+      64 ADDCONST	//  x n
+    }>	//  x n
+    32 PUSHINT	//  x n _17=32
+    exp INLINECALLDICT	//  x n _18
+    s2 s(-1) PUXC	//  x n x _18
+    GEQ	//  x n _19
+    IF:<{	//  x n
+      SWAP	//  n x
+      32 RSHIFT#	//  n x
+      SWAP	//  x n
+      32 ADDCONST	//  x n
+    }>	//  x n
+    16 PUSHINT	//  x n _24=16
+    exp INLINECALLDICT	//  x n _25
+    s2 s(-1) PUXC	//  x n x _25
+    GEQ	//  x n _26
+    IF:<{	//  x n
+      SWAP	//  n x
+      16 RSHIFT#	//  n x
+      SWAP	//  x n
+      16 ADDCONST	//  x n
+    }>	//  x n
+    8 PUSHINT	//  x n _31=8
+    exp INLINECALLDICT	//  x n _32
+    s2 s(-1) PUXC	//  x n x _32
+    GEQ	//  x n _33
+    IF:<{	//  x n
+      SWAP	//  n x
+      8 RSHIFT#	//  n x
+      SWAP	//  x n
+      8 ADDCONST	//  x n
+    }>	//  x n
+    4 PUSHINT	//  x n _38=4
+    exp INLINECALLDICT	//  x n _39
+    s2 s(-1) PUXC	//  x n x _39
+    GEQ	//  x n _40
+    IF:<{	//  x n
+      SWAP	//  n x
+      4 RSHIFT#	//  n x
+      SWAP	//  x n
+      4 ADDCONST	//  x n
+    }>	//  x n
+    2 PUSHINT	//  x n _45=2
+    exp INLINECALLDICT	//  x n _46
+    s2 s(-1) PUXC	//  x n x _46
+    GEQ	//  x n _47
+    IF:<{	//  x n
+      SWAP	//  n x
+      2 RSHIFT#	//  n x
+      SWAP	//  x n
+      2 ADDCONST	//  x n
+    }>	//  x n
+    1 PUSHINT	//  x n _52=1
+    exp INLINECALLDICT	//  x n _53
+    s1 s2 XCHG	//  n x _53
+    GEQ	//  n _54
+    IF:<{	//  n
+      INC	//  n
+    }>	//  n
+  }>
+  load_data PROCINLINE:<{
+    // 
+    c4 PUSH	//  _1
+    CTOS	//  ds
+    LDVARUINT16	//  _3 ds
+    LDMSGADDR	//  _3 _10 _9
+    DROP	//  _3 _5
+  }>
+  save_data PROC:<{
+    //  balance_usdq jetton_master_address
+    NEWC
+    ROT	//  jetton_master_address _2 balance_usdq
+    STVARUINT16	//  jetton_master_address _3
+    SWAP	//  _3 jetton_master_address
+    STSLICER	//  _4
+    ENDC	//  _5
+    c4 POP
+  }>
+  get_usdq PROC:<{
+    //  ton
+    DROP	// 
+    1 PUSHINT	//  _1=1
+  }>
+  get_ton PROC:<{
+    //  usdq
+    DROP	// 
+    1 PUSHINT	//  _1=1
+  }>
+  buy_ton PROC:<{
+    //  sender_address usdq
+    NIP	//  usdq
+    DUP	//  usdq usdq
+    get_ton CALLDICT	//  usdq _6
+    NIP	//  ton
+    BALANCE	//  ton _8
+    FIRST	//  ton balance_ton
+    2DUP	//  ton balance_ton ton balance_ton
+    LESS	//  ton balance_ton _11
+    2 1 BLKDROP2	//  _11
+    100 THROWIFNOT
+  }>
+  buy_usdq PROC:<{
+    //  sender_address ton
+    NIP	//  ton
+    load_data INLINECALLDICT	//  ton _15 _16
+    DROP	//  ton balance_usdq
+    SWAP	//  balance_usdq ton
+    get_usdq CALLDICT	//  balance_usdq usdq
+    s0 s1 PUSH2	//  balance_usdq usdq usdq balance_usdq
+    LESS	//  balance_usdq usdq _11
+    2 1 BLKDROP2	//  _11
+    100 THROWIFNOT
+  }>
+  recv_internal PROC:<{
+    //  balance msg_value in_msg_full in_msg_body
+    3 1 BLKDROP2	//  in_msg_body
+    DUP	//  in_msg_body in_msg_body
+    SEMPTY	//  in_msg_body _4
+    IFJMP:<{	//  in_msg_body
+      DROP	// 
+    }>	//  in_msg_body
+    32 LDU	//  _48 _47
+    DROP	//  op
+    0 PUSHINT	//  op _29
+    s1 s(-1) PUXC	//  op op _29
+    EQUAL	//  op _30
+    IFJMP:<{	//  op
+      DROP	// 
+    }>	//  op
+    1 PUSHINT	//  op _34
+    EQUAL	//  _35
+    IFJMP:<{	// 
+    }>	// 
+  }>
+}END>c

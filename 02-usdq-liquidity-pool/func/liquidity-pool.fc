@@ -1,0 +1,72 @@
+#include "op-codes.fc";
+
+{-
+  storage#_ balance_usdq:Coins master_address:MsgAddressInt = Storage;
+-}
+
+(int, slice) load_data() inline {
+  slice ds = get_data().begin_parse();
+  return (ds~load_coins(), ds~load_msg_addr());
+}
+
+() save_data(int balance_usdq, slice jetton_master_address) {
+  begin_cell()
+   .store_coins(balance_usdq)
+   .store_slice(jetton_master_address)
+  .end_cell().set_data();
+}
+
+;; get oracle
+int get_usdq(int ton) {
+  return 1;
+}
+
+int get_ton(int usdq) {
+  return 1;
+}
+
+() buy_ton(slice sender_address, int usdq) {
+  (int balance_usdq, slice master_address) = load_data();
+  int ton = get_ton(usdq);
+  int balance_ton = get_balance().pair_first();
+  throw_unless(100, ton < balance_ton);
+  balance_usdq += usdq;
+  balance_ton -= ton;
+  save_data(balance_usdq, master_address);
+  ;; send message
+}
+
+() buy_usdq(slice sender_address, int ton) {
+  (int balance_usdq, slice master_address) = load_data();
+  int usdq = get_usdq(ton);
+  int balance_ton = get_balance().pair_first();
+  throw_unless(100, usdq < balance_usdq);
+  balance_usdq -= usdq;
+  save_data(balance_usdq, master_address);
+}
+
+() recv_internal(int balance, int msg_value, cell in_msg_full, slice in_msg_body) {
+  if (in_msg_body.slice_empty?()) {
+    return ();
+  }
+  slice cs = in_msg_full.begin_parse();
+  cs~skip_bits(4);
+  slice sender_address = cs~load_msg_addr();
+  cs~load_msg_addr();
+  cs~load_coins();
+  cs~skip_bits(1);
+  cs~load_coins();
+  int fwd_fee = cs~load_coins();
+
+  int op = in_msg_body~load_uint(32);
+
+  if (op == op::buy_ton()) {
+    buy_ton(sender_address, in_msg_body~load_coins());
+    return ();
+  }
+
+  if (op == op::buy_usdq()) {
+    buy_usdq(sender_address, msg_value);
+    return ();
+  }
+}
