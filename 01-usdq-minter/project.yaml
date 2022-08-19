@@ -1,0 +1,11 @@
+contract:
+  data: fift/data.fif
+  func:
+    - func/qubedao.fc
+  tests:
+    - tests/tests.fc
+
+wallet-contract:
+  data: fift/data.fif
+  func:
+    - func/usdq-wallet.fc

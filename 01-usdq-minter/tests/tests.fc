@@ -1,0 +1,265 @@
+;; Each test function must specify method_id
+;; Test functions method_id need to started from 0
+
+;; Each test functions must to be in pairs
+;; First funtion expect nothing in arguments
+;; But need to return:
+;;        function selector - which function to test, e.g. 0 for recv_internal, -1 recv_external, 85143 for seqno, and so on
+;;        tuple - stack values needed to be passed to function in tuple
+;;        c4 cell - start data of smart contract
+;;        c7 tuple / null
+;;        gas limit integer / null
+
+;; After test data function
+;; We need to define test funtion
+;; It will accept:
+;;        exit code - exit code of runvm, here you can check errors / not
+;;        c4 cell - data of smart contract after runvm invokes
+;;        tuple - stack values of smart contract
+;;        c5 cell - here you can check all outcoming messages
+;;        gas - gas that was used
+;; By default test is passed
+;; You can use throw_if to fail test
+
+#include "func/stdlib-ext.fc";
+#include "func/usdq-as-jetton-wallet-code.fc";
+#include "func/usdq-as-jetton.fc";
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_init_contract() method_id(0) {
+  return [113777, empty_tuple(), begin_cell().end_cell(), get_c7(), null()];
+}
+_ c_init_contract(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(1) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_empty_msg() method_id(2) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(0x18, 6)
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_empty_msg(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(3) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_donation() method_id(4) {
+  tuple stack = empty_tuple();
+  stack~tpush(10000);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(0, 32).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_donation(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(5) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_no_return_no_ton() method_id(6) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(3, 32).store_uint(10000, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_no_return_no_ton(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(7) {
+  throw_if(100, exit_code == 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_put_ton() method_id(8) {
+  tuple stack = empty_tuple();
+  stack~tpush(10000);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(1, 32).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_put_ton(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(9) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_full_return_ton() method_id(10) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(3, 32).store_uint(9999, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_full_return_ton(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(11) {
+  throw_if(200 + exit_code, exit_code != 0);
+  slice actions = actions.begin_parse();
+  actions~parse_one_action();
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_put_ton_2() method_id(12) {
+  tuple stack = empty_tuple();
+  stack~tpush(100000);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(1, 32).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_put_ton_2(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(13) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_lend_usdq() method_id(14) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(2, 32).store_uint(106956, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_lend_usdq(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(15) {
+  throw_if(200 + exit_code, exit_code != 0);
+  
+  slice actions = actions.begin_parse();
+  actions~parse_one_action();
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_no_return_ton_when_lending() method_id(16) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(3, 32).store_uint(2, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_no_return_ton_when_lending(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(17) {
+  throw_if(100, exit_code == 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_no_increase_lending() method_id(18) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(2, 32).store_uint(2, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_no_increase_lending(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(19) {
+  throw_if(100, exit_code == 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_return_usdq() method_id(20) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_builder(
+      get_usdq_wallet_addr(get_usdq_wallet_state_init(
+        my_address(), my_address(), get_usdq_wallet_code()
+      ))
+    )
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell()
+    .store_uint(0x7bdd97de, 32)
+    .store_uint(0, 64)
+    .store_coins(106956)
+    .store_slice(my_address())
+    .store_slice(my_address())
+    .end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_return_usdq(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(21) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_return_ton_after_lending() method_id(22) {
+  tuple stack = empty_tuple();
+  stack~tpush(0);
+  stack~tpush(begin_cell()
+    .store_uint(6, 4)
+    .store_slice(my_address())
+    .store_uint(0, 2).end_cell());
+  stack~tpush(begin_cell().store_uint(3, 32).store_uint(100000, 64).end_cell().begin_parse());
+  
+  return [0, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_return_ton_after_lending(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(23) {
+  throw_if(200 + exit_code, exit_code != 0);
+  
+  slice actions = actions.begin_parse();
+  actions~parse_one_action();
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_get_wallet_code() method_id(24) {
+  return [71217, empty_tuple(), get_prev_c4(), get_c7(), null()];
+}
+_ c_get_wallet_code(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(25) {
+  throw_if(200 + exit_code, exit_code != 0);
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[int,tuple,cell,tuple,int] i_get_wallet_addr() method_id(26) {
+  tuple stack = empty_tuple();
+  stack~tpush(my_address());
+  return [103289, stack, get_prev_c4(), get_c7(), null()];
+}
+_ c_get_wallet_addr(int exit_code,cell data,tuple stack,cell actions,int gas) method_id(27) {
+  throw_if(200 + exit_code, exit_code != 0);
+  
+  (int wid, int addr) = parse_std_addr(first(stack));
+  wid~dump();
+  addr~dump();
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

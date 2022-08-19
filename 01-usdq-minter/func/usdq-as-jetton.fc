@@ -1,0 +1,90 @@
+#include "stdlib-ext.fc";
+
+;; compliance with https://github.com/ton-blockchain/TIPs/issues/74
+
+cell get_usdq_jetton_content() method_id {
+  return begin_cell()
+    .store_uint(0x0168747470733A2F2F7261772E67697468756275736572636F6E74656E742E63, 256)
+    .store_uint(0x6F6D2F7175626564616F2F5175626544414F2F64306565353739623665363935, 256)
+    .store_uint(0x6463613866623934383235336237373261366339356265376562342F75736471, 256)
+    .store_uint(0x2D61732D6A6574746F6E2E6A736F6E, 120)
+    .end_cell();
+}
+
+;; ---------------------------------------------------------------------------------------- ;;
+;;  start of https://github.com/ton-blockchain/token-contract/blob/main/ft/jetton-utils.fc  ;;
+;; ---------------------------------------------------------------------------------------- ;;
+cell get_usdq_wallet_data(int balance, slice owner_address, slice master_address,
+                          cell usdq_wallet_code) inline method_id {
+  return begin_cell()
+    .store_coins(balance)
+    .store_slice(owner_address)
+    .store_slice(master_address)
+    .store_ref(usdq_wallet_code)
+  .end_cell();
+}
+
+cell get_usdq_wallet_state_init(slice owner_address, slice master_address,
+    cell usdq_wallet_code) inline method_id {
+  return begin_cell()
+    .store_uint(6, 5)  ;; no split_depth, no ticktock, ^code, ^data, no libraries
+    .store_ref(usdq_wallet_code)
+    .store_ref(get_usdq_wallet_data(0, owner_address, master_address, usdq_wallet_code))
+  .end_cell();
+}
+
+builder get_usdq_wallet_addr(cell state_init) inline method_id {
+  return begin_cell()
+    .store_uint(1024, 11)  ;; internal address, workchain 0
+    .store_uint(cell_hash(state_init), 256);
+}
+
+builder get_usdq_wallet_addr_from_addr(int owner_address, slice master_address,
+    cell usdq_wallet_code) inline method_id {
+  return get_usdq_wallet_addr(get_usdq_wallet_state_init(
+    begin_cell().store_uint(1024, 11).store_uint(owner_address, 256).end_cell().begin_parse(),
+    master_address,
+    usdq_wallet_code
+  ));
+}
+;; ---------------------------------------------------------------------------------------- ;;
+;;   end of https://github.com/ton-blockchain/token-contract/blob/main/ft/jetton-utils.fc   ;;
+;; ---------------------------------------------------------------------------------------- ;;
+
+cell build_usdq_wallet_master_msg_incoming(int addr, int nusdq_amount,
+    cell usdq_wallet_code, slice master_address) method_id {
+  var state_init = get_usdq_wallet_state_init(
+    begin_cell().store_uint(1024, 11).store_uint(addr, 256).end_cell().begin_parse(),
+    master_address,
+    usdq_wallet_code
+  );
+  
+  return begin_cell()
+    .store_uint(0x18, 6)
+    .store_builder(get_usdq_wallet_addr(state_init))
+    .store_coins(10000000)
+    .store_uint(6, 1 + 4 + 4 + 64 + 32 + 2 + 1)
+    .store_ref(state_init)
+    
+    .store_uint(0x178d4519, 32)     ;; internal transfer
+    .store_uint(rand(1 << 64), 64)  ;; random query_id
+    .store_vu16(nusdq_amount)
+    .store_uint(0, 4)               ;; from + response address
+    .store_vu16(0)                  ;; forward TON amount
+    .store_dict(new_dict())         ;; forward payload
+  .end_cell();
+}
+
+builder build_usdq_wallet_msg_body_incoming(
+    int query_id, int nusdq_amount,
+    slice from_owner_addr, slice response_addr,
+    int forward_ton_amount, slice either_forward_payload) method_id {
+  return begin_cell()
+    .store_uint(0x178d4519, 32)
+    .store_uint(query_id, 64)
+    .store_coins(nusdq_amount)
+    .store_slice(from_owner_addr)
+    .store_slice(response_addr)
+    .store_coins(forward_ton_amount)
+    .store_slice(either_forward_payload);
+}

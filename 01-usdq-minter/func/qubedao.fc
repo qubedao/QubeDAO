@@ -1,0 +1,344 @@
+;; SC for exchanging TON <-> USDQ:TON.
+;; - Compliant with 'Fungible tokens (Jettons) standard'
+;;       at https://github.com/ton-blockchain/TIPs/issues/74
+;; (c) ProgramCrafter, 2022
+
+#include "func/usdq-as-jetton-wallet-code.fc";
+#include "func/usdq-as-jetton.fc";
+#include "func/stdlib-ext.fc";
+
+;;    ==========================================================    ;;
+;;    \\      ||                                      ||      //    ;;
+;;     XX     ||         Inlined configuration        ||     XX     ;;
+;;    //      ||                                      ||      \\    ;;
+;;    ==========================================================    ;;
+
+int qbd_holders_addr() method_id {
+  return 0x3333333333333333333333333333333333333333333333333333333333333333;
+}
+int price_oracle_addr() method_id {
+  return 0x2222222222222222222222222222222244444444444444444444444444444444;
+}
+int liquidity_pool_addr() method_id {
+  return 0x1111111111111111111111111111111111111111111111111111111111111111;
+}
+
+;;    ==========================================================    ;;
+;;    \\      ||                                      ||      //    ;;
+;;     XX     ||  Jetton master-contract get-methods  ||     XX     ;;
+;;    //      ||                                      ||      \\    ;;
+;;    ==========================================================    ;;
+
+(int, int, slice, cell, cell) get_jetton_data() method_id {
+  ;; total_supply, mintable, admin_address, jetton_content, jetton_wallet_code
+  return (
+    get_data().begin_parse().preload_uint(64),
+    -1,
+    begin_cell().store_uint(0, 8).store_uint(qbd_holders_addr(), 256).end_cell().begin_parse(),
+    get_usdq_jetton_content(),
+    get_usdq_wallet_code()
+  );
+}
+slice get_wallet_address(slice owner_address) method_id {
+  ;; associated wallet for USDQ
+  (int wid, int addr) = parse_std_addr(owner_address);
+  throw_if(100, wid != 0);  ;; USDQ works on workchain with id 0
+  return get_usdq_wallet_addr_from_addr(addr, my_address(), get_usdq_wallet_code()).end_cell().begin_parse();
+}
+
+;;    ==========================================================    ;;
+;;    \\      ||                                      ||      //    ;;
+;;     XX     ||            Business logic            ||     XX     ;;
+;;    //      ||                                      ||      \\    ;;
+;;    ==========================================================    ;;
+
+() init_contract() impure method_id {
+  ;; current lending rate, data about all users
+  set_data(
+     begin_cell()
+    .store_uint(0, 64)        {-   amount of issued USDQ   -}
+    .store_uint(793, 32)      {-   per-second lending rate, 793 * 86400*365 / 10^12 = 0.025008048   -}
+    .store_uint(1230000, 64)  {-   microUSDs per TON       -}
+    .store_dict(new_dict())
+    .end_cell()
+  );
+}
+
+() save_contract(int usdq_issued, int lending_rate, int ton_exchange_rate, cell users) impure {
+  set_data(
+     begin_cell()
+    .store_uint(usdq_issued, 64)
+    .store_uint(lending_rate, 32)
+    .store_uint(ton_exchange_rate, 64)
+    .store_dict(users)
+    .end_cell()
+  );
+}
+
+() destroy(int addr, int balance_nton, int balance_nusdq) impure {
+  ;; 100/115 TONs go to liquidity pool to destroy same count of USDQ,
+  ;;  10/115 TONs go there as stakers profit,
+  ;;
+  ;;   5/115 TONs go to QubeDAO
+  
+  send_raw_message(begin_cell()
+    .store_uint(0x18, 6)
+    .store_uint(4, 3).store_uint(0, 8).store_uint(liquidity_pool_addr(), 256)
+    .store_coins(balance_nton * 110 / 115)
+    .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+       {-  message body starts here  -}
+    .store_uint(1, 32)              {-  burning USDQ  -}
+    .store_uint(balance_nusdq, 64)  {-     amount     -}
+    .end_cell(), 0
+  );
+  
+  send_raw_message(begin_cell()
+    .store_uint(0x18, 6)
+    .store_uint(4, 3).store_uint(0, 8).store_uint(qbd_holders_addr(), 256)
+    .store_coins(balance_nton * 5 / 115)
+    .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+       {-  message body starts here  -}
+    .store_uint(1, 32)              {-   burning QBD   -}
+    .end_cell(), 0
+  );
+}
+
+() send_usdq(int addr, int amount) impure {
+  ;; paying transfer fees separately, revert on errors
+  ;; wallet must trust INCOMING message from master contract
+  send_raw_message(build_usdq_wallet_master_msg_incoming(addr, amount, get_usdq_wallet_code(), my_address()), 1);
+}
+
+() send_ton(int addr, int amount) impure {
+  send_raw_message(begin_cell()
+    .store_uint(0x18, 6)
+    .store_uint(4, 3).store_uint(0, 8).store_uint(addr, 256)
+    .store_coins(amount)
+    .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+    .end_cell(), 0
+  );
+}
+
+;;    ========================================================    ;;
+;;    \\      ||                                    ||      //    ;;
+;;     XX     ||    Processing incoming messages    ||     XX     ;;
+;;    //      ||                                    ||      \\    ;;
+;;    ========================================================    ;;
+
+
+() recv_internal(int coins, cell in_msg_full, slice in_msg) impure {
+  {---------------------------}
+  {-     parsing message     -}
+  {---------------------------}
+  
+  if (in_msg.slice_bits() < 32) {      ;; no opcode present
+    return ();
+  }
+  
+  {------------------------------------------------------}
+  {-    extracting source address from CommonMsgInfo    -}
+  {------------------------------------------------------}
+  
+  slice in_msg_full = in_msg_full.begin_parse();
+  if (in_msg_full~load_uint(4) & 1) {  ;; int_msg_info$0, ihr_disabled, bounce, bounced
+    return ();
+  }
+  slice src = in_msg_full~load_msg_addr();
+  
+  slice contract_data = get_data().begin_parse();
+  int nusdq_issued = contract_data~load_uint(64);
+  int rate         = contract_data~load_uint(32);
+  int musd_p_ton   = contract_data~load_uint(64);
+  cell users       = contract_data~load_dict();
+  
+  int percents     = 0;
+  
+  (int fine_user_addr, slice fine_user_data, int success) = udict_get_min?(users, 256);
+  while (success) {
+    int balance_nton   = fine_user_data~load_uint(64);
+    int balance_nusdq  = fine_user_data~load_uint(64);
+    int last_update    = fine_user_data~load_uint(64);
+    
+    int percents_cur_nton = (now() - last_update) * balance_nusdq * rate / 1000000000000;
+    balance_nton -= percents_cur_nton;
+    last_update = now();
+    
+    if (balance_nusdq & (balance_nton * musd_p_ton / 1150000 <= balance_nusdq)) {
+      destroy(fine_user_addr, balance_nton, balance_nusdq);
+      users~udict_delete?(256, fine_user_addr);
+    } else {
+      percents += percents_cur_nton;
+      
+      users~udict_set_builder(256, fine_user_addr,
+        begin_cell().store_uint(balance_nton, 64)
+                    .store_uint(balance_nusdq, 64)
+                    .store_uint(last_update, 64));
+    }
+    
+    (fine_user_addr, fine_user_data, success) = udict_get_next?(users, 256, fine_user_addr);
+  }
+  
+  if (percents > 10000) {
+    send_ton(liquidity_pool_addr(), percents);
+  }
+  
+  (int wid, int addr) = parse_std_addr(src);
+  throw_if(0, wid != 0);
+  
+  int op = in_msg~load_uint(32);
+  if (op == 0) {                       ;; donation aka simple money transfer
+                                       ;; + fining users who have overdraft their credit limits
+    return ();
+  }
+  
+  if (op == 1) {                       ;; putting TON
+    (slice user, var success) = users.udict_get?(256, addr);
+    
+    int balance_nton  = 0;
+    int balance_nusdq = 0;
+    int last_update   = 0;
+    if (success) {
+      balance_nton    = user~load_uint(64);
+      balance_nusdq   = user~load_uint(64);
+      last_update     = user~load_uint(64);
+    }
+    
+    balance_nton += coins;
+    
+    builder user_n = begin_cell()
+      .store_uint(balance_nton,   64)
+      .store_uint(balance_nusdq,  64)
+      .store_uint(last_update,    64);
+    users~udict_set_builder(256, addr, user_n);
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if (op == 2) {                       ;; lending USDQ
+    (slice user, var success) = users.udict_get?(256, addr);
+    throw_unless(100, success);
+    
+    int balance_nton   = user~load_uint(64);
+    int balance_nusdq  = user~load_uint(64);
+    int last_update    = user~load_uint(64);
+    
+    int request_nusdq = in_msg~load_uint(64);
+    balance_nusdq += request_nusdq;
+    nusdq_issued += request_nusdq;
+    
+    throw_if(100, balance_nton * musd_p_ton / 1150000 <= balance_nusdq);
+    
+    send_usdq(addr, request_nusdq);
+    
+    builder user_n = begin_cell()
+      .store_uint(balance_nton,   64)
+      .store_uint(balance_nusdq,  64)
+      .store_uint(last_update,    64);
+    users~udict_set_builder(256, addr, user_n);
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if (op == 3) {                       ;; taking TON back
+    (slice user, var success) = users.udict_get?(256, addr);
+    throw_unless(100, success);
+    
+    int balance_nton   = user~load_uint(64);
+    int balance_nusdq  = user~load_uint(64);
+    int last_update    = user~load_uint(64);
+    
+    int request_nton   = in_msg~load_uint(64);
+    balance_nton -= request_nton;
+    
+    throw_if(100, balance_nton < 0);
+    throw_if(101, balance_nton * musd_p_ton / 1150000 <= balance_nusdq);
+    
+    send_ton(addr, request_nton);
+    
+    builder user_n = begin_cell()
+      .store_uint(balance_nton,   64)
+      .store_uint(balance_nusdq,  64)
+      .store_uint(last_update,    64);
+    users~udict_set_builder(256, addr, user_n);
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if ((op == 10) & (addr == qbd_holders_addr())) {  ;; updating lending rate
+    rate = in_msg~load_uint(32);
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if ((op == 11) & (addr == price_oracle_addr())) {  ;; updating TON<->USD rate
+    musd_p_ton = in_msg~load_uint(64);
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if ((op == 10000) & (addr == qbd_holders_addr())) {  ;; setting SC parameters
+    set_data(in_msg~load_ref());
+    
+    return ();
+  }
+  
+  if ((op == 10001) & (addr == qbd_holders_addr())) {  ;; setting SC code
+    cell code = in_msg~load_ref();
+    
+    set_code(code);
+    set_c3(code.begin_parse().bless());
+    
+    save_contract(nusdq_issued, rate, musd_p_ton, users);
+    
+    return ();
+  }
+  
+  if (op == 0x7bdd97de) {  ;; burn notification == returning USDQ
+    int query_id          = in_msg~load_uint(64);
+    int nusdq_amount      = in_msg~load_coins();
+    slice from_owner_addr = in_msg~load_msg_addr();
+    (int wid, int addr)   = parse_std_addr(from_owner_addr);
+    throw_if(100, wid != 0);
+    throw_if(101, slice_hash(src) !=
+      cell_hash(get_usdq_wallet_addr_from_addr(addr, my_address(), get_usdq_wallet_code()).end_cell())
+    );
+    throw_if(102, nusdq_issued < nusdq_amount);
+    
+    (slice user, var success) = users.udict_get?(256, addr);
+    if (success) {
+      int balance_nton   = user~load_uint(64);
+      int balance_nusdq  = user~load_uint(64);
+      int last_update    = user~load_uint(64);
+      
+      balance_nusdq  = max(0, balance_nusdq - nusdq_amount);
+      
+      builder user_n = begin_cell()
+        .store_uint(balance_nton,   64)
+        .store_uint(balance_nusdq,  64)
+        .store_uint(last_update,    64);
+      users~udict_set_builder(256, addr, user_n);
+    }
+    
+    save_contract(nusdq_issued - nusdq_amount, rate, musd_p_ton, users);
+    
+    return ();
+  }
+}
+
+() recv_external(slice in_msg) impure {
+  [int balance, _] = get_balance();
+  
+  if (balance <= 100000000) {  ;; balance <= 0.1 TON
+    accept_message();
+  }
+}

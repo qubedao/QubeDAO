@@ -1,0 +1,1025 @@
+"Asm.fif" include
+// automatically generated from `C:\Users\Tigr\AppData\Local\toncli\toncli\func-libs\stdlib-tests.func` `D:\TON_FunC\qubedao-repo\01-usdq-minter\func\qubedao.fc` incl:`func/usdq-as-jetton-wallet-code.fc` incl:`func/usdq-as-jetton.fc` incl:`func/stdlib-ext.fc` 
+PROGRAM{
+  71217 DECLMETHOD get_usdq_wallet_code
+  97986 DECLMETHOD swap_remove
+  80537 DECLMETHOD parse_one_action
+  120686 DECLMETHOD get_usdq_jetton_content
+  73706 DECLMETHOD get_usdq_wallet_data
+  130065 DECLMETHOD get_usdq_wallet_state_init
+  92542 DECLMETHOD get_usdq_wallet_addr
+  78362 DECLMETHOD get_usdq_wallet_addr_from_addr
+  127004 DECLMETHOD build_usdq_wallet_master_msg_incoming
+  95602 DECLMETHOD build_usdq_wallet_msg_body_incoming
+  86919 DECLMETHOD qbd_holders_addr
+  95907 DECLMETHOD price_oracle_addr
+  88764 DECLMETHOD liquidity_pool_addr
+  106029 DECLMETHOD get_jetton_data
+  103289 DECLMETHOD get_wallet_address
+  113777 DECLMETHOD init_contract
+  DECLPROC save_contract
+  DECLPROC destroy
+  DECLPROC send_usdq
+  DECLPROC send_ton
+  DECLPROC recv_internal
+  DECLPROC recv_external
+  get_usdq_wallet_code PROC:<{
+    // 
+    1204221081368542827431947 PUSHINT	//  _3
+    NEWC	//  _3 _4
+    80 STU	//  b1
+    24 PUSHINT	//  b1 _10
+    NEWC	//  b1 _10 _11
+    6 STU	//  b1 b2
+    205 PUSHINT	//  b1 b2 _17
+    NEWC	//  b1 b2 _17 _18
+    8 STU	//  b1 b2 b3
+    0 PUSHINT	//  b1 b2 b3 _24
+    NEWC	//  b1 b2 b3 _24 _25
+    2 STU	//  b1 b2 b3 b4
+    0 PUSHINT	//  b1 b2 b3 b4 _31
+    NEWC	//  b1 b2 b3 b4 _31 _32
+    2 STU	//  b1 b2 b3 b4 b5
+    1768440679951816746788985377232864336482708686729131098922756 PUSHINT	//  b1 b2 b3 b4 b5 _38
+    474388085589262663637939755339504656766969588653096504443109323008358343505 PUSHINT	//  b1 b2 b3 b4 b5 _38 _39=474388085589262663637939755339504656766969588653096504443109323008358343505
+    3713598076943776617372012166755086454743508288999248432063926776415345708157 PUSHINT	//  b1 b2 b3 b4 b5 _38 _39=474388085589262663637939755339504656766969588653096504443109323008358343505 _40=3713598076943776617372012166755086454743508288999248432063926776415345708157
+    NEWC	//  b1 b2 b3 b4 b5 _38 _39=474388085589262663637939755339504656766969588653096504443109323008358343505 _40=3713598076943776617372012166755086454743508288999248432063926776415345708157 _41
+    256 STU	//  b1 b2 b3 b4 b5 _38 _39=474388085589262663637939755339504656766969588653096504443109323008358343505 _43
+    256 STU	//  b1 b2 b3 b4 b5 _38 _45
+    202 STU	//  b1 b2 b3 b4 b5 b6
+    ENDC	//  b1 b2 b3 b4 b5 _48
+    SWAP	//  b1 b2 b3 b4 _48 b5
+    STREF	//  b1 b2 b3 b4 b5
+    286840395106943248332018736 PUSHINT	//  b1 b2 b3 b4 b5 _53
+    NEWC	//  b1 b2 b3 b4 b5 _53 _54
+    90 STU	//  b1 b2 b3 b4 b5 b7
+    ENDC	//  b1 b2 b3 b4 b5 _57
+    SWAP	//  b1 b2 b3 b4 _57 b5
+    STREF	//  b1 b2 b3 b4 b5
+    ENDC	//  b1 b2 b3 b4 _59
+    SWAP	//  b1 b2 b3 _59 b4
+    STREF	//  b1 b2 b3 b4
+    65863142453806894349544446227258624274189975603069452142800727363 PUSHINT	//  b1 b2 b3 b4 _64
+    36022583215402421593011100142372347800306584632647209243536935656885792106506 PUSHINT	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506
+    27373763721312709193723342817871411470548375373454213157540027864160500760560 PUSHINT	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506 _66=27373763721312709193723342817871411470548375373454213157540027864160500760560
+    36293164438319279897193734048255927429703774868638808287025597159227288535346 PUSHINT	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506 _66=27373763721312709193723342817871411470548375373454213157540027864160500760560 _67=36293164438319279897193734048255927429703774868638808287025597159227288535346
+    NEWC	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506 _66=27373763721312709193723342817871411470548375373454213157540027864160500760560 _67=36293164438319279897193734048255927429703774868638808287025597159227288535346 _68
+    256 STU	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506 _66=27373763721312709193723342817871411470548375373454213157540027864160500760560 _70
+    256 STU	//  b1 b2 b3 b4 _64 _65=36022583215402421593011100142372347800306584632647209243536935656885792106506 _72
+    256 STU	//  b1 b2 b3 b4 _64 _74
+    220 STU	//  b1 b2 b3 b4 b8
+    2837239951521285648543060 PUSHINT	//  b1 b2 b3 b4 b8 _80
+    98055536315304533079511538323522743496187160145746862821000526869695768298746 PUSHINT	//  b1 b2 b3 b4 b8 _80 _81=98055536315304533079511538323522743496187160145746862821000526869695768298746
+    NEWC	//  b1 b2 b3 b4 b8 _80 _81=98055536315304533079511538323522743496187160145746862821000526869695768298746 _82
+    256 STU	//  b1 b2 b3 b4 b8 _80 _84
+    88 STU	//  b1 b2 b3 b4 b8 b9
+    ENDC	//  b1 b2 b3 b4 b8 _87
+    SWAP	//  b1 b2 b3 b4 _87 b8
+    STREF	//  b1 b2 b3 b4 b8
+    ENDC	//  b1 b2 b3 b4 _89
+    SWAP	//  b1 b2 b3 _89 b4
+    STREF	//  b1 b2 b3 b4
+    ENDC	//  b1 b2 b3 _91
+    SWAP	//  b1 b2 _91 b3
+    STREF	//  b1 b2 b3
+    0 PUSHINT	//  b1 b2 b3 _96
+    NEWC	//  b1 b2 b3 _96 _97
+    2 STU	//  b1 b2 b3 b10
+    0 PUSHINT	//  b1 b2 b3 b10 _103
+    NEWC	//  b1 b2 b3 b10 _103 _104
+    2 STU	//  b1 b2 b3 b10 b11
+    5384451206639154132487420426665891536062686866748673283 PUSHINT	//  b1 b2 b3 b10 b11 _110
+    56412072603631189131879129507379125436402733260684039578857651819644964835908 PUSHINT	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908
+    23416910694254422157143782468847592266632279607868338729456880423444947224364 PUSHINT	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908 _112=23416910694254422157143782468847592266632279607868338729456880423444947224364
+    27139227854076437901905259503674178365365924610259309998543734221547604181142 PUSHINT	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908 _112=23416910694254422157143782468847592266632279607868338729456880423444947224364 _113=27139227854076437901905259503674178365365924610259309998543734221547604181142
+    NEWC	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908 _112=23416910694254422157143782468847592266632279607868338729456880423444947224364 _113=27139227854076437901905259503674178365365924610259309998543734221547604181142 _114
+    256 STU	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908 _112=23416910694254422157143782468847592266632279607868338729456880423444947224364 _116
+    256 STU	//  b1 b2 b3 b10 b11 _110 _111=56412072603631189131879129507379125436402733260684039578857651819644964835908 _118
+    256 STU	//  b1 b2 b3 b10 b11 _110 _120
+    186 STU	//  b1 b2 b3 b10 b11 b12
+    411551011557230023194491375645770678860975903747126595619 PUSHINT	//  b1 b2 b3 b10 b11 b12 _126
+    37304547022129019144362492844277410312796138246506582838897011168558795288960 PUSHINT	//  b1 b2 b3 b10 b11 b12 _126 _127=37304547022129019144362492844277410312796138246506582838897011168558795288960
+    NEWC	//  b1 b2 b3 b10 b11 b12 _126 _127=37304547022129019144362492844277410312796138246506582838897011168558795288960 _128
+    256 STU	//  b1 b2 b3 b10 b11 b12 _126 _130
+    192 STU	//  b1 b2 b3 b10 b11 b12 b13
+    ENDC	//  b1 b2 b3 b10 b11 b12 _133
+    SWAP	//  b1 b2 b3 b10 b11 _133 b12
+    STREF	//  b1 b2 b3 b10 b11 b12
+    0 PUSHINT	//  b1 b2 b3 b10 b11 b12 _138
+    58830411301347406957768801130457948425498167343084405895381307716712459236091 PUSHINT	//  b1 b2 b3 b10 b11 b12 _138 _139=58830411301347406957768801130457948425498167343084405895381307716712459236091
+    NEWC	//  b1 b2 b3 b10 b11 b12 _138 _139=58830411301347406957768801130457948425498167343084405895381307716712459236091 _140
+    256 STU	//  b1 b2 b3 b10 b11 b12 _138 _142
+    8 STU	//  b1 b2 b3 b10 b11 b12 b14
+    ENDC	//  b1 b2 b3 b10 b11 b12 _145
+    SWAP	//  b1 b2 b3 b10 b11 _145 b12
+    STREF	//  b1 b2 b3 b10 b11 b12
+    1040082358761997411685153886966508884 PUSHINT	//  b1 b2 b3 b10 b11 b12 _150
+    NEWC	//  b1 b2 b3 b10 b11 b12 _150 _151
+    120 STU	//  b1 b2 b3 b10 b11 b12 b15
+    ENDC	//  b1 b2 b3 b10 b11 b12 _154
+    SWAP	//  b1 b2 b3 b10 b11 _154 b12
+    STREF	//  b1 b2 b3 b10 b11 b12
+    ENDC	//  b1 b2 b3 b10 b11 _156
+    SWAP	//  b1 b2 b3 b10 _156 b11
+    STREF	//  b1 b2 b3 b10 b11
+    12025720148 PUSHINT	//  b1 b2 b3 b10 b11 _161
+    43432981002052302420001024199157575428021903434943071654127457801028996461509 PUSHINT	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509
+    57906038500622613239570130233781085706413501943924846822807989732468838478428 PUSHINT	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509 _163=57906038500622613239570130233781085706413501943924846822807989732468838478428
+    27139226128639851469364976448230105721318766107091933609965068896148379770922 PUSHINT	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509 _163=57906038500622613239570130233781085706413501943924846822807989732468838478428 _164=27139226128639851469364976448230105721318766107091933609965068896148379770922
+    NEWC	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509 _163=57906038500622613239570130233781085706413501943924846822807989732468838478428 _164=27139226128639851469364976448230105721318766107091933609965068896148379770922 _165
+    256 STU	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509 _163=57906038500622613239570130233781085706413501943924846822807989732468838478428 _167
+    256 STU	//  b1 b2 b3 b10 b11 _161 _162=43432981002052302420001024199157575428021903434943071654127457801028996461509 _169
+    256 STU	//  b1 b2 b3 b10 b11 _161 _171
+    34 STU	//  b1 b2 b3 b10 b11 b16
+    ENDC	//  b1 b2 b3 b10 b11 _174
+    SWAP	//  b1 b2 b3 b10 _174 b11
+    STREF	//  b1 b2 b3 b10 b11
+    ENDC	//  b1 b2 b3 b10 _176
+    SWAP	//  b1 b2 b3 _176 b10
+    STREF	//  b1 b2 b3 b10
+    4687283202589780233404645549043806127090456722890419540 PUSHINT	//  b1 b2 b3 b10 _181
+    32570151591335767983722473519926968278850051843800502119601001183354889117600 PUSHINT	//  b1 b2 b3 b10 _181 _182=32570151591335767983722473519926968278850051843800502119601001183354889117600
+    NEWC	//  b1 b2 b3 b10 _181 _182=32570151591335767983722473519926968278850051843800502119601001183354889117600 _183
+    256 STU	//  b1 b2 b3 b10 _181 _185
+    188 STU	//  b1 b2 b3 b10 b17
+    ENDC	//  b1 b2 b3 b10 _188
+    SWAP	//  b1 b2 b3 _188 b10
+    STREF	//  b1 b2 b3 b10
+    ENDC	//  b1 b2 b3 _190
+    SWAP	//  b1 b2 _190 b3
+    STREF	//  b1 b2 b3
+    ENDC	//  b1 b2 _192
+    SWAP	//  b1 _192 b2
+    STREF	//  b1 b2
+    0 PUSHINT	//  b1 b2 _197
+    NEWC	//  b1 b2 _197 _198
+    2 STU	//  b1 b2 b18
+    0 PUSHINT	//  b1 b2 b18 _204
+    NEWC	//  b1 b2 b18 _204 _205
+    2 STU	//  b1 b2 b18 b19
+    0 PUSHINT	//  b1 b2 b18 b19 _211
+    NEWC	//  b1 b2 b18 b19 _211 _212
+    2 STU	//  b1 b2 b18 b19 b20
+    7642630633149305909214709831819513033 PUSHINT	//  b1 b2 b18 b19 b20 _218
+    NEWC	//  b1 b2 b18 b19 b20 _218 _219
+    123 STU	//  b1 b2 b18 b19 b20 b21
+    ENDC	//  b1 b2 b18 b19 b20 _222
+    SWAP	//  b1 b2 b18 b19 _222 b20
+    STREF	//  b1 b2 b18 b19 b20
+    5 PUSHINT	//  b1 b2 b18 b19 b20 _227
+    NEWC	//  b1 b2 b18 b19 b20 _227 _228
+    4 STU	//  b1 b2 b18 b19 b20 b22
+    1054118881410426531726456731443317759 PUSHINT	//  b1 b2 b18 b19 b20 b22 _234
+    78273544013025670910797073272883645868226331314487268151345245764720710171492 PUSHINT	//  b1 b2 b18 b19 b20 b22 _234 _235=78273544013025670910797073272883645868226331314487268151345245764720710171492
+    NEWC	//  b1 b2 b18 b19 b20 b22 _234 _235=78273544013025670910797073272883645868226331314487268151345245764720710171492 _236
+    256 STU	//  b1 b2 b18 b19 b20 b22 _234 _238
+    121 STU	//  b1 b2 b18 b19 b20 b22 b23
+    ENDC	//  b1 b2 b18 b19 b20 b22 _241
+    SWAP	//  b1 b2 b18 b19 b20 _241 b22
+    STREF	//  b1 b2 b18 b19 b20 b22
+    54154121160363472 PUSHINT	//  b1 b2 b18 b19 b20 b22 _246
+    61823739175827512806369435955023700606475810542281642140588992949322861123705 PUSHINT	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705
+    115368213338201613169772843494385187026005479330249935964821166850483776065344 PUSHINT	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705 _248=115368213338201613169772843494385187026005479330249935964821166850483776065344
+    78386021036380515164848266221266747781768398452308470474543341779255855974574 PUSHINT	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705 _248=115368213338201613169772843494385187026005479330249935964821166850483776065344 _249=78386021036380515164848266221266747781768398452308470474543341779255855974574
+    NEWC	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705 _248=115368213338201613169772843494385187026005479330249935964821166850483776065344 _249=78386021036380515164848266221266747781768398452308470474543341779255855974574 _250
+    256 STU	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705 _248=115368213338201613169772843494385187026005479330249935964821166850483776065344 _252
+    256 STU	//  b1 b2 b18 b19 b20 b22 _246 _247=61823739175827512806369435955023700606475810542281642140588992949322861123705 _254
+    256 STU	//  b1 b2 b18 b19 b20 b22 _246 _256
+    57 STU	//  b1 b2 b18 b19 b20 b22 b24
+    19953458710987158860690608046254840290393729621833798524797329456 PUSHINT	//  b1 b2 b18 b19 b20 b22 b24 _262
+    NEWC	//  b1 b2 b18 b19 b20 b22 b24 _262 _263
+    216 STU	//  b1 b2 b18 b19 b20 b22 b24 b25
+    ENDC	//  b1 b2 b18 b19 b20 b22 b24 _266
+    SWAP	//  b1 b2 b18 b19 b20 b22 _266 b24
+    STREF	//  b1 b2 b18 b19 b20 b22 b24
+    ENDC	//  b1 b2 b18 b19 b20 b22 _268
+    SWAP	//  b1 b2 b18 b19 b20 _268 b22
+    STREF	//  b1 b2 b18 b19 b20 b22
+    ENDC	//  b1 b2 b18 b19 b20 _270
+    SWAP	//  b1 b2 b18 b19 _270 b20
+    STREF	//  b1 b2 b18 b19 b20
+    ENDC	//  b1 b2 b18 b19 _272
+    SWAP	//  b1 b2 b18 _272 b19
+    STREF	//  b1 b2 b18 b19
+    5 PUSHINT	//  b1 b2 b18 b19 _277
+    NEWC	//  b1 b2 b18 b19 _277 _278
+    4 STU	//  b1 b2 b18 b19 b26
+    862563720838230510494469119 PUSHINT	//  b1 b2 b18 b19 b26 _284
+    NEWC	//  b1 b2 b18 b19 b26 _284 _285
+    90 STU	//  b1 b2 b18 b19 b26 b27
+    ENDC	//  b1 b2 b18 b19 b26 _288
+    SWAP	//  b1 b2 b18 b19 _288 b26
+    STREF	//  b1 b2 b18 b19 b26
+    0 PUSHINT	//  b1 b2 b18 b19 b26 _293
+    NEWC	//  b1 b2 b18 b19 b26 _293 _294
+    2 STU	//  b1 b2 b18 b19 b26 b28
+    2411796606167743417177790176638250702228855326290861459718037698720681750 PUSHINT	//  b1 b2 b18 b19 b26 b28 _300
+    NEWC	//  b1 b2 b18 b19 b26 b28 _300 _301
+    241 STU	//  b1 b2 b18 b19 b26 b28 b29
+    ENDC	//  b1 b2 b18 b19 b26 b28 _304
+    SWAP	//  b1 b2 b18 b19 b26 _304 b28
+    STREF	//  b1 b2 b18 b19 b26 b28
+    0 PUSHINT	//  b1 b2 b18 b19 b26 b28 _309
+    NEWC	//  b1 b2 b18 b19 b26 b28 _309 _310
+    2 STU	//  b1 b2 b18 b19 b26 b28 b30
+    2869096449 PUSHINT	//  b1 b2 b18 b19 b26 b28 b30 _316
+    NEWC	//  b1 b2 b18 b19 b26 b28 b30 _316 _317
+    32 STU	//  b1 b2 b18 b19 b26 b28 b30 b31
+    ENDC	//  b1 b2 b18 b19 b26 b28 b30 _320
+    SWAP	//  b1 b2 b18 b19 b26 b28 _320 b30
+    STREF	//  b1 b2 b18 b19 b26 b28 b30
+    4186981889360840029030140437328917705098006501320760984833 PUSHINT	//  b1 b2 b18 b19 b26 b28 b30 _325
+    NEWC	//  b1 b2 b18 b19 b26 b28 b30 _325 _326
+    192 STU	//  b1 b2 b18 b19 b26 b28 b30 b32
+    ENDC	//  b1 b2 b18 b19 b26 b28 b30 _329
+    SWAP	//  b1 b2 b18 b19 b26 b28 _329 b30
+    STREF	//  b1 b2 b18 b19 b26 b28 b30
+    ENDC	//  b1 b2 b18 b19 b26 b28 _331
+    SWAP	//  b1 b2 b18 b19 b26 _331 b28
+    STREF	//  b1 b2 b18 b19 b26 b28
+    ENDC	//  b1 b2 b18 b19 b26 _333
+    SWAP	//  b1 b2 b18 b19 _333 b26
+    STREF	//  b1 b2 b18 b19 b26
+    ENDC	//  b1 b2 b18 b19 _335
+    SWAP	//  b1 b2 b18 _335 b19
+    STREF	//  b1 b2 b18 b19
+    ENDC	//  b1 b2 b18 _337
+    SWAP	//  b1 b2 _337 b18
+    STREF	//  b1 b2 b18
+    5 PUSHINT	//  b1 b2 b18 _342
+    NEWC	//  b1 b2 b18 _342 _343
+    4 STU	//  b1 b2 b18 b33
+    49591387617142666740777108620137386668345091358566197789096065810549759 PUSHINT	//  b1 b2 b18 b33 _349
+    20760302431029182743015402584813901223072450952576369674956027558658768267077 PUSHINT	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077
+    75275241695103448778740028436934298220597847114351183830067357699218973961356 PUSHINT	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077 _351=75275241695103448778740028436934298220597847114351183830067357699218973961356
+    82741118836260378289617490582187661697451799821299739892277150819113790539334 PUSHINT	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077 _351=75275241695103448778740028436934298220597847114351183830067357699218973961356 _352=82741118836260378289617490582187661697451799821299739892277150819113790539334
+    NEWC	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077 _351=75275241695103448778740028436934298220597847114351183830067357699218973961356 _352=82741118836260378289617490582187661697451799821299739892277150819113790539334 _353
+    256 STU	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077 _351=75275241695103448778740028436934298220597847114351183830067357699218973961356 _355
+    256 STU	//  b1 b2 b18 b33 _349 _350=20760302431029182743015402584813901223072450952576369674956027558658768267077 _357
+    256 STU	//  b1 b2 b18 b33 _349 _359
+    235 STU	//  b1 b2 b18 b33 b34
+    876169885641 PUSHINT	//  b1 b2 b18 b33 b34 _365
+    NEWC	//  b1 b2 b18 b33 b34 _365 _366
+    40 STU	//  b1 b2 b18 b33 b34 b35
+    ENDC	//  b1 b2 b18 b33 b34 _369
+    SWAP	//  b1 b2 b18 b33 _369 b34
+    STREF	//  b1 b2 b18 b33 b34
+    ENDC	//  b1 b2 b18 b33 _371
+    SWAP	//  b1 b2 b18 _371 b33
+    STREF	//  b1 b2 b18 b33
+    5 PUSHINT	//  b1 b2 b18 b33 _376
+    NEWC	//  b1 b2 b18 b33 _376 _377
+    4 STU	//  b1 b2 b18 b33 b36
+    201 PUSHINT	//  b1 b2 b18 b33 b36 _383
+    45410639881149204999850651248731000179411374485457940568791221085971221905786 PUSHINT	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786
+    45410633892317834389427871766280003991829468164093042025082070436782236745740 PUSHINT	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786 _385=45410633892317834389427871766280003991829468164093042025082070436782236745740
+    77822998011507182909891883278063841800395320474667403251994724252324595131579 PUSHINT	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786 _385=45410633892317834389427871766280003991829468164093042025082070436782236745740 _386=77822998011507182909891883278063841800395320474667403251994724252324595131579
+    NEWC	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786 _385=45410633892317834389427871766280003991829468164093042025082070436782236745740 _386=77822998011507182909891883278063841800395320474667403251994724252324595131579 _387
+    256 STU	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786 _385=45410633892317834389427871766280003991829468164093042025082070436782236745740 _389
+    256 STU	//  b1 b2 b18 b33 b36 _383 _384=45410639881149204999850651248731000179411374485457940568791221085971221905786 _391
+    256 STU	//  b1 b2 b18 b33 b36 _383 _393
+    17 STU	//  b1 b2 b18 b33 b36 b37
+    ENDC	//  b1 b2 b18 b33 b36 _396
+    SWAP	//  b1 b2 b18 b33 _396 b36
+    STREF	//  b1 b2 b18 b33 b36
+    143186919530598925000773145086920654064079662780793930022596168905 PUSHINT	//  b1 b2 b18 b33 b36 _401
+    NEWC	//  b1 b2 b18 b33 b36 _401 _402
+    217 STU	//  b1 b2 b18 b33 b36 b38
+    ENDC	//  b1 b2 b18 b33 b36 _405
+    SWAP	//  b1 b2 b18 b33 _405 b36
+    STREF	//  b1 b2 b18 b33 b36
+    ENDC	//  b1 b2 b18 b33 _407
+    SWAP	//  b1 b2 b18 _407 b33
+    STREF	//  b1 b2 b18 b33
+    ENDC	//  b1 b2 b18 _409
+    SWAP	//  b1 b2 _409 b18
+    STREF	//  b1 b2 b18
+    ENDC	//  b1 b2 _411
+    SWAP	//  b1 _411 b2
+    STREF	//  b1 b2
+    ENDC	//  b1 _413
+    SWAP	//  _413 b1
+    STREF	//  b1
+    ENDC	//  _415
+  }>
+  swap_remove PROC:<{
+    //  t index
+    OVER	//  t index t
+    TLEN	//  t index _3
+    DEC	//  t index l
+    s1 s(-1) PUXC	//  t index index l
+    EQUAL	//  t index _6
+    IFJMP:<{	//  t index
+      DROP	//  t
+      TPOP	//  t value
+    }>	//  t index
+    2DUP	//  t index t index
+    INDEXVAR	//  t index value
+    s0 s2 XCHG	//  value index t
+    TPOP	//  value index t _12
+    s1 s2 XCHG	//  value t index _12
+    SETINDEXVAR	//  value t
+    SWAP	//  t value
+  }>
+  parse_one_action PROC:<{
+    //  actions
+    LDREF	//  previous actions
+    32 LDU	//  previous action_id actions
+    SWAP	//  previous actions action_id
+    s0 DUMP	//  previous actions action_id
+    DUP
+    247711853 PUSHINT	//  previous actions action_id action_id _10=247711853
+    EQUAL	//  previous actions action_id _11
+    IF:<{	//  previous actions action_id
+      DROP	//  previous actions
+      4445 PUSHINT	//  previous actions _12=4445
+      s0 DUMP	//  previous actions _13
+      DROP	//  previous actions
+      1397050948 PUSHINT	//  previous actions _14=1397050948
+      s0 DUMP	//  previous actions _15
+      DROP	//  previous actions
+      8 LDU	//  previous _16 actions
+      SWAP	//  previous actions _16
+      s0 DUMP	//  previous actions _19
+      DROP	//  previous actions
+      LDREF	//  previous _55 _54
+      DROP	//  previous _20
+      s0 DUMP	//  previous _22
+      DROP	//  previous
+    }>ELSE<{	//  previous actions action_id
+      DUP
+      2907562126 PUSHINT	//  previous actions action_id action_id _23=2907562126
+      EQUAL	//  previous actions action_id _24
+      IF:<{	//  previous actions action_id
+        DROP	//  previous actions
+        4445 PUSHINT	//  previous actions _25=4445
+        s0 DUMP	//  previous actions _26
+        DROP	//  previous actions
+        23438651275822149 PUSHINT	//  previous actions _27=23438651275822149
+        s0 DUMP	//  previous actions _28
+        DROP	//  previous actions
+        LDREF	//  previous _57 _56
+        DROP	//  previous _29
+        s0 DUMP	//  previous _31
+        DROP	//  previous
+      }>ELSE<{	//  previous actions action_id
+        921090057 PUSHINT	//  previous actions action_id _32=921090057
+        EQUAL	//  previous actions _33
+        IF:<{	//  previous actions
+          4445 PUSHINT	//  previous actions _34=4445
+          s0 DUMP	//  previous actions _35
+          DROP	//  previous actions
+          23157172037899845 PUSHINT	//  previous actions _36=23157172037899845
+          s0 DUMP	//  previous actions _37
+          DROP	//  previous actions
+          8 LDU	//  previous _38 actions
+          SWAP	//  previous actions _38
+          s0 DUMP	//  previous actions _41
+          DROP	//  previous actions
+          LDDICT	//  previous _61 _60
+          DROP	//  previous _42
+          s0 DUMP	//  previous _44
+          DROP	//  previous
+        }>ELSE<{	//  previous actions
+          DROP	//  previous
+          100 THROW
+        }>
+      }>
+    }>
+    CTOS	//  _47
+  }>
+  get_usdq_jetton_content PROC:<{
+    // 
+    235629877659761281780625421800533870 PUSHINT	//  _0=235629877659761281780625421800533870
+    45406873707674611466187312695969843437010076133414249170208066351564980446321 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321
+    50399639963717701463601153999043190439242674004441620318968268883439683778869 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869
+    636868685092637875018676025462067355155571762704951223135721953953328672355 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _3=636868685092637875018676025462067355155571762704951223135721953953328672355
+    NEWC	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _3=636868685092637875018676025462067355155571762704951223135721953953328672355 _4
+    256 STU	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _6
+    256 STU	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _8
+    256 STU	//  _0=235629877659761281780625421800533870 _10
+    120 STU	//  _12
+    ENDC	//  _13
+  }>
+  get_usdq_wallet_data PROC:<{
+    //  balance owner_address master_address usdq_wallet_code
+    NEWC	//  balance owner_address master_address usdq_wallet_code _4
+    s0 s4 XCHG2	//  usdq_wallet_code owner_address master_address _4 balance
+    STVARUINT16	//  usdq_wallet_code owner_address master_address _5
+    ROT	//  usdq_wallet_code master_address _5 owner_address
+    STSLICER	//  usdq_wallet_code master_address _6
+    SWAP	//  usdq_wallet_code _6 master_address
+    STSLICER	//  usdq_wallet_code _7
+    STREF	//  _8
+    ENDC	//  _9
+  }>
+  get_usdq_wallet_state_init PROC:<{
+    //  owner_address master_address usdq_wallet_code
+    0 PUSHINT	//  owner_address master_address usdq_wallet_code _3=0
+    s3 s2 s3 XC2PU	//  usdq_wallet_code _3=0 owner_address master_address usdq_wallet_code
+    get_usdq_wallet_data INLINECALLDICT	//  usdq_wallet_code _4
+    6 PUSHINT	//  usdq_wallet_code _4 _5=6
+    NEWC	//  usdq_wallet_code _4 _5=6 _6
+    5 STU	//  usdq_wallet_code _4 _8
+    s1 s2 XCHG	//  _4 usdq_wallet_code _8
+    STREF	//  _4 _9
+    STREF	//  _10
+    ENDC	//  _11
+  }>
+  get_usdq_wallet_addr PROC:<{
+    //  state_init
+    HASHCU	//  _1
+    10 PUSHPOW2	//  _1 _2=1024
+    NEWC	//  _1 _2=1024 _3
+    11 STU	//  _1 _5
+    256 STU	//  _7
+  }>
+  get_usdq_wallet_addr_from_addr PROC:<{
+    //  owner_address master_address usdq_wallet_code
+    10 PUSHPOW2	//  owner_address master_address usdq_wallet_code _3=1024
+    NEWC	//  owner_address master_address usdq_wallet_code _3=1024 _4
+    11 STU	//  owner_address master_address usdq_wallet_code _6
+    s1 s3 XCHG	//  usdq_wallet_code master_address owner_address _6
+    256 STU	//  usdq_wallet_code master_address _8
+    ENDC	//  usdq_wallet_code master_address _9
+    CTOS	//  usdq_wallet_code master_address _10
+    s0 s2 XCHG	//  _10 master_address usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  _11
+    get_usdq_wallet_addr INLINECALLDICT	//  _12
+  }>
+  build_usdq_wallet_master_msg_incoming PROC:<{
+    //  addr nusdq_amount usdq_wallet_code master_address
+    10 PUSHPOW2	//  addr nusdq_amount usdq_wallet_code master_address _5=1024
+    NEWC	//  addr nusdq_amount usdq_wallet_code master_address _5=1024 _6
+    11 STU	//  addr nusdq_amount usdq_wallet_code master_address _8
+    s1 s4 XCHG	//  master_address nusdq_amount usdq_wallet_code addr _8
+    256 STU	//  master_address nusdq_amount usdq_wallet_code _10
+    ENDC	//  master_address nusdq_amount usdq_wallet_code _11
+    CTOS	//  master_address nusdq_amount usdq_wallet_code _12
+    s0 s3 s3 XCHG3	//  nusdq_amount _12 master_address usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  nusdq_amount state_init
+    NEWDICT	//  nusdq_amount state_init _14
+    0 PUSHINT	//  nusdq_amount state_init _14 _15=0
+    64 PUSHPOW2	//  nusdq_amount state_init _14 _15=0 _18
+    RAND	//  nusdq_amount state_init _14 _15=0 _19
+    395134233 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233
+    6 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6
+    s5 PUSH	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 state_init
+    get_usdq_wallet_addr INLINECALLDICT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22
+    24 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _23=24
+    NEWC	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _23=24 _24
+    6 STU	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _26
+    STB	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _27
+    10000000 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _27 _28=10000000
+    STVARUINT16	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _29
+    108 STU	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _43
+    s1 s5 XCHG	//  nusdq_amount _20=395134233 _14 _15=0 _19 state_init _43
+    STREF	//  nusdq_amount _20=395134233 _14 _15=0 _19 _44
+    s1 s4 XCHG	//  nusdq_amount _19 _14 _15=0 _20=395134233 _44
+    32 STU	//  nusdq_amount _19 _14 _15=0 _46
+    s1 s3 XCHG	//  nusdq_amount _15=0 _14 _19 _46
+    64 STU	//  nusdq_amount _15=0 _14 _48
+    s0 s3 XCHG2	//  _14 _15=0 _48 nusdq_amount
+    STVARUINT16	//  _14 _15=0 _49
+    4 STU	//  _14 _51
+    0 PUSHINT	//  _14 _51 _52=0
+    STVARUINT16	//  _14 _53
+    STDICT	//  _54
+    ENDC	//  _55
+  }>
+  build_usdq_wallet_msg_body_incoming PROC:<{
+    //  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload
+    395134233 PUSHINT	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _6=395134233
+    NEWC	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _6=395134233 _7
+    32 STU	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _9
+    s1 s6 XCHG	//  either_forward_payload nusdq_amount from_owner_addr response_addr forward_ton_amount query_id _9
+    64 STU	//  either_forward_payload nusdq_amount from_owner_addr response_addr forward_ton_amount _11
+    s0 s4 XCHG2	//  either_forward_payload forward_ton_amount from_owner_addr response_addr _11 nusdq_amount
+    STVARUINT16	//  either_forward_payload forward_ton_amount from_owner_addr response_addr _12
+    ROT	//  either_forward_payload forward_ton_amount response_addr _12 from_owner_addr
+    STSLICER	//  either_forward_payload forward_ton_amount response_addr _13
+    SWAP	//  either_forward_payload forward_ton_amount _13 response_addr
+    STSLICER	//  either_forward_payload forward_ton_amount _14
+    SWAP	//  either_forward_payload _14 forward_ton_amount
+    STVARUINT16	//  either_forward_payload _15
+    SWAP	//  _15 either_forward_payload
+    STSLICER	//  _16
+  }>
+  qbd_holders_addr PROC:<{
+    // 
+    23158417847463239084714197001737581570653996933128112807891516801582625927987 PUSHINT	//  _0=23158417847463239084714197001737581570653996933128112807891516801582625927987
+  }>
+  price_oracle_addr PROC:<{
+    // 
+    15438945231642159389809464667825054380481368937674867000389461148712653046852 PUSHINT	//  _0=15438945231642159389809464667825054380481368937674867000389461148712653046852
+  }>
+  liquidity_pool_addr PROC:<{
+    // 
+    7719472615821079694904732333912527190217998977709370935963838933860875309329 PUSHINT	//  _0=7719472615821079694904732333912527190217998977709370935963838933860875309329
+  }>
+  get_jetton_data PROC:<{
+    // 
+    c4 PUSH	//  _0
+    CTOS	//  _1
+    64 PLDU	//  _3
+    -1 PUSHINT	//  _3 _4=-1
+    qbd_holders_addr CALLDICT	//  _3 _4=-1 _5
+    0 PUSHINT	//  _3 _4=-1 _5 _6=0
+    NEWC	//  _3 _4=-1 _5 _6=0 _7
+    8 STU	//  _3 _4=-1 _5 _9
+    256 STU	//  _3 _4=-1 _11
+    ENDC	//  _3 _4=-1 _12
+    CTOS	//  _3 _4=-1 _13
+    get_usdq_jetton_content CALLDICT	//  _3 _4=-1 _13 _14
+    get_usdq_wallet_code CALLDICT	//  _3 _4=-1 _13 _14 _15
+  }>
+  get_wallet_address PROC:<{
+    //  owner_address
+    REWRITESTDADDR	//  wid addr
+    SWAP	//  addr wid
+    0 NEQINT	//  addr _6
+    100 THROWIF
+    MYADDR	//  addr _8
+    get_usdq_wallet_code CALLDICT	//  addr _8 _9
+    get_usdq_wallet_addr_from_addr INLINECALLDICT	//  _10
+    ENDC	//  _11
+    CTOS	//  _12
+  }>
+  init_contract PROC:<{
+    // 
+    NEWDICT	//  _0
+    1230000 PUSHINT	//  _0 _1=1230000
+    793 PUSHINT	//  _0 _1=1230000 _2=793
+    0 PUSHINT	//  _0 _1=1230000 _2=793 _3=0
+    NEWC	//  _0 _1=1230000 _2=793 _3=0 _4
+    64 STU	//  _0 _1=1230000 _2=793 _6
+    32 STU	//  _0 _1=1230000 _8
+    64 STU	//  _0 _10
+    STDICT	//  _11
+    ENDC	//  _12
+    c4 POP
+  }>
+  save_contract PROC:<{
+    //  usdq_issued lending_rate ton_exchange_rate users
+    s0 s3 XCHG
+    NEWC	//  users lending_rate ton_exchange_rate usdq_issued _4
+    64 STU	//  users lending_rate ton_exchange_rate _6
+    s1 s2 XCHG	//  users ton_exchange_rate lending_rate _6
+    32 STU	//  users ton_exchange_rate _8
+    64 STU	//  users _10
+    STDICT	//  _11
+    ENDC	//  _12
+    c4 POP
+  }>
+  destroy PROC:<{
+    //  addr balance_nton balance_nusdq
+    s2 POP	//  balance_nusdq balance_nton
+    1 PUSHINT	//  balance_nusdq balance_nton _3=1
+    0 PUSHINT	//  balance_nusdq balance_nton _3=1 _4=0
+    liquidity_pool_addr CALLDICT	//  balance_nusdq balance_nton _3=1 _4=0 _5
+    OVER	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0
+    4 PUSHINT	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0 _7=4
+    24 PUSHINT	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0 _7=4 _8=24
+    NEWC	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0 _7=4 _8=24 _9
+    6 STU	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0 _7=4 _11
+    3 STU	//  balance_nusdq balance_nton _3=1 _4=0 _5 _6=0 _13
+    8 STU	//  balance_nusdq balance_nton _3=1 _4=0 _5 _15
+    256 STU	//  balance_nusdq balance_nton _3=1 _4=0 _17
+    s3 PUSH	//  balance_nusdq balance_nton _3=1 _4=0 _17 balance_nton
+    110 MULCONST	//  balance_nusdq balance_nton _3=1 _4=0 _17 _19
+    115 PUSHINT	//  balance_nusdq balance_nton _3=1 _4=0 _17 _19 _20=115
+    DIV	//  balance_nusdq balance_nton _3=1 _4=0 _17 _21
+    STVARUINT16	//  balance_nusdq balance_nton _3=1 _4=0 _22
+    107 STU	//  balance_nusdq balance_nton _3=1 _36
+    32 STU	//  balance_nusdq balance_nton _38
+    s1 s2 XCHG	//  balance_nton balance_nusdq _38
+    64 STU	//  balance_nton _40
+    ENDC	//  balance_nton _41
+    0 PUSHINT	//  balance_nton _41 _42=0
+    SENDRAWMSG
+    1 PUSHINT	//  balance_nton _44=1
+    0 PUSHINT	//  balance_nton _44=1 _45=0
+    qbd_holders_addr CALLDICT	//  balance_nton _44=1 _45=0 _46
+    OVER	//  balance_nton _44=1 _45=0 _46 _47=0
+    4 PUSHINT	//  balance_nton _44=1 _45=0 _46 _47=0 _48=4
+    24 PUSHINT	//  balance_nton _44=1 _45=0 _46 _47=0 _48=4 _49=24
+    NEWC	//  balance_nton _44=1 _45=0 _46 _47=0 _48=4 _49=24 _50
+    6 STU	//  balance_nton _44=1 _45=0 _46 _47=0 _48=4 _52
+    3 STU	//  balance_nton _44=1 _45=0 _46 _47=0 _54
+    8 STU	//  balance_nton _44=1 _45=0 _46 _56
+    256 STU	//  balance_nton _44=1 _45=0 _58
+    s0 s3 XCHG	//  _58 _44=1 _45=0 balance_nton
+    5 MULCONST	//  _58 _44=1 _45=0 _60
+    115 PUSHINT	//  _58 _44=1 _45=0 _60 _61=115
+    DIV	//  _58 _44=1 _45=0 _62
+    s1 s3 XCHG	//  _45=0 _44=1 _58 _62
+    STVARUINT16	//  _45=0 _44=1 _63
+    s1 s2 XCHG	//  _44=1 _45=0 _63
+    107 STU	//  _44=1 _77
+    32 STU	//  _79
+    ENDC	//  _80
+    0 PUSHINT	//  _80 _81=0
+    SENDRAWMSG
+  }>
+  send_usdq PROC:<{
+    //  addr amount
+    get_usdq_wallet_code CALLDICT	//  addr amount _2
+    MYADDR	//  addr amount _2 _3
+    build_usdq_wallet_master_msg_incoming CALLDICT	//  _4
+    1 PUSHINT	//  _4 _5=1
+    SENDRAWMSG
+  }>
+  send_ton PROC:<{
+    //  addr amount
+    0 PUSHINT	//  addr amount _2=0
+    DUP	//  addr amount _2=0 _3=0
+    4 PUSHINT	//  addr amount _2=0 _3=0 _4=4
+    24 PUSHINT	//  addr amount _2=0 _3=0 _4=4 _5=24
+    NEWC	//  addr amount _2=0 _3=0 _4=4 _5=24 _6
+    6 STU	//  addr amount _2=0 _3=0 _4=4 _8
+    3 STU	//  addr amount _2=0 _3=0 _10
+    8 STU	//  addr amount _2=0 _12
+    s1 s3 XCHG	//  _2=0 amount addr _12
+    256 STU	//  _2=0 amount _14
+    SWAP	//  _2=0 _14 amount
+    STVARUINT16	//  _2=0 _15
+    107 STU	//  _29
+    ENDC	//  _30
+    0 PUSHINT	//  _30 _31=0
+    SENDRAWMSG
+  }>
+  recv_internal PROC:<{
+    //  coins in_msg_full in_msg
+    DUP	//  coins in_msg_full in_msg in_msg
+    SBITS	//  coins in_msg_full in_msg _3
+    32 LESSINT	//  coins in_msg_full in_msg _5
+    IFJMP:<{	//  coins in_msg_full in_msg
+      3 BLKDROP	// 
+    }>	//  coins in_msg_full in_msg
+    SWAP	//  coins in_msg in_msg_full
+    CTOS	//  coins in_msg in_msg_full
+    4 LDU	//  coins in_msg _8 in_msg_full
+    SWAP
+    1 PUSHINT	//  coins in_msg in_msg_full _8 _11=1
+    AND	//  coins in_msg in_msg_full _12
+    IFJMP:<{	//  coins in_msg in_msg_full
+      3 BLKDROP	// 
+    }>	//  coins in_msg in_msg_full
+    LDMSGADDR	//  coins in_msg _333 _332
+    DROP	//  coins in_msg src
+    c4 PUSH	//  coins in_msg src _17
+    CTOS	//  coins in_msg src contract_data
+    64 LDU	//  coins in_msg src nusdq_issued contract_data
+    32 LDU	//  coins in_msg src nusdq_issued rate contract_data
+    64 LDU	//  coins in_msg src nusdq_issued rate musd_p_ton contract_data
+    LDDICT	//  coins in_msg src nusdq_issued rate musd_p_ton _341 _340
+    DROP	//  coins in_msg src nusdq_issued rate musd_p_ton users
+    0 PUSHINT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents=0
+    OVER
+    8 PUSHPOW2	//  coins in_msg src nusdq_issued rate musd_p_ton users percents=0 users _39=256
+    DICTUMIN
+    NULLSWAPIFNOT2	//  coins in_msg src nusdq_issued rate musd_p_ton users percents=0 fine_user_data fine_user_addr success
+    WHILE:<{
+    }>DO<{	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_data fine_user_addr
+      SWAP	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr fine_user_data
+      64 LDU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton fine_user_data
+      64 LDU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq fine_user_data
+      64 LDU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _350 _349
+      DROP	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq last_update
+      NOW	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq last_update _54
+      SWAP	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _54 last_update
+      SUB	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _55
+      OVER	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _55 balance_nusdq
+      MUL	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _56
+      s7 PUSH	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _56 rate
+      MUL	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _57
+      1000000000000 PUSHINT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq _57 _58=1000000000000
+      DIV	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq percents_cur_nton
+      s2 s2 XCPU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton percents_cur_nton
+      SUB	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton
+      NOW	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update
+      s1 s7 PUSH2	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update balance_nton musd_p_ton
+      MUL	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _62
+      1150000 PUSHINT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _62 _63=1150000
+      DIV	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _64
+      s3 PUSH	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _64 balance_nusdq
+      LEQ	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _65
+      s3 s(-1) PUXC	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update balance_nusdq _65
+      AND	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update _66
+      IF:<{	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update
+        DROP
+        s2 POP	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr balance_nton balance_nusdq
+        s2 PUSH
+        -ROT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr fine_user_addr balance_nton balance_nusdq
+        destroy CALLDICT
+        s0 s2 PUXC
+        8 PUSHPOW2	//  coins in_msg src nusdq_issued rate musd_p_ton fine_user_addr percents fine_user_addr users _69=256
+        DICTUDEL	//  coins in_msg src nusdq_issued rate musd_p_ton fine_user_addr percents _351 _352
+        DROP	//  coins in_msg src nusdq_issued rate musd_p_ton fine_user_addr percents users
+      }>ELSE<{	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr percents_cur_nton balance_nusdq balance_nton last_update
+        s5 s3 XCHG2	//  coins in_msg src nusdq_issued rate musd_p_ton users balance_nton fine_user_addr last_update balance_nusdq percents percents_cur_nton
+        ADD	//  coins in_msg src nusdq_issued rate musd_p_ton users balance_nton fine_user_addr last_update balance_nusdq percents
+        s0 s4 XCHG
+        NEWC	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr last_update balance_nusdq balance_nton _73
+        64 STU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr last_update balance_nusdq _75
+        64 STU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr last_update _77
+        64 STU	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr _79
+        s0 s0 s3 XCPUXC
+        8 PUSHPOW2	//  coins in_msg src nusdq_issued rate musd_p_ton fine_user_addr percents _79 fine_user_addr users _80=256
+        DICTUSETB	//  coins in_msg src nusdq_issued rate musd_p_ton fine_user_addr percents users
+      }>
+      s2 s2 XCPU
+      8 PUSHPOW2	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_addr users _82=256
+      DICTUGETNEXT
+      NULLSWAPIFNOT2	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_data fine_user_addr success
+    }>	//  coins in_msg src nusdq_issued rate musd_p_ton users percents fine_user_data fine_user_addr
+    2DROP	//  coins in_msg src nusdq_issued rate musd_p_ton users percents
+    DUP
+    10000 PUSHINT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents percents _84=10000
+    GREATER	//  coins in_msg src nusdq_issued rate musd_p_ton users percents _85
+    IF:<{	//  coins in_msg src nusdq_issued rate musd_p_ton users percents
+      liquidity_pool_addr CALLDICT	//  coins in_msg src nusdq_issued rate musd_p_ton users percents _86
+      SWAP	//  coins in_msg src nusdq_issued rate musd_p_ton users _86 percents
+      send_ton CALLDICT
+    }>ELSE<{
+      DROP	//  coins in_msg src nusdq_issued rate musd_p_ton users
+    }>
+    s4 PUSH	//  coins in_msg src nusdq_issued rate musd_p_ton users src
+    REWRITESTDADDR	//  coins in_msg src nusdq_issued rate musd_p_ton users wid addr
+    SWAP	//  coins in_msg src nusdq_issued rate musd_p_ton users addr wid
+    0 NEQINT	//  coins in_msg src nusdq_issued rate musd_p_ton users addr _93
+    0 THROWIF
+    s0 s6 XCHG	//  coins addr src nusdq_issued rate musd_p_ton users in_msg
+    32 LDU	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg
+    OVER	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg op
+    0 EQINT	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg _100
+    IFJMP:<{	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg
+      9 BLKDROP	// 
+    }>	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg
+    OVER	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg op
+    1 EQINT	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg _102
+    IFJMP:<{	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg
+      2DROP
+      s4 POP	//  coins addr users nusdq_issued rate musd_p_ton
+      s4 s3 PUSH2
+      8 PUSHPOW2	//  coins addr users nusdq_issued rate musd_p_ton addr users _105=256
+      DICTUGET
+      NULLSWAPIFNOT	//  coins addr users nusdq_issued rate musd_p_ton user success
+      0 PUSHINT	//  coins addr users nusdq_issued rate musd_p_ton user success balance_nton=0
+      s0 s(-1) s1 PU2XC	//  coins addr users nusdq_issued rate musd_p_ton user last_update=0 balance_nton=0 balance_nusdq=0 success
+      IF:<{	//  coins addr users nusdq_issued rate musd_p_ton user last_update=0 balance_nton=0 balance_nusdq=0
+        3 BLKDROP	//  coins addr users nusdq_issued rate musd_p_ton user
+        64 LDU	//  coins addr users nusdq_issued rate musd_p_ton balance_nton user
+        64 LDU	//  coins addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq user
+        64 LDU	//  coins addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq _367 _366
+        DROP	//  coins addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq last_update
+        ROT	//  coins addr users nusdq_issued rate musd_p_ton balance_nusdq last_update balance_nton
+      }>ELSE<{
+        s3 POP	//  coins addr users nusdq_issued rate musd_p_ton balance_nusdq last_update balance_nton
+      }>
+      s0 s8 XCHG2	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq balance_nton coins
+      ADD	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq balance_nton
+      NEWC	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq balance_nton _124
+      64 STU	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq _126
+      64 STU	//  last_update addr users nusdq_issued rate musd_p_ton _128
+      s1 s6 XCHG	//  musd_p_ton addr users nusdq_issued rate last_update _128
+      64 STU	//  musd_p_ton addr users nusdq_issued rate user_n
+      s0 s4 s3 XCHG3
+      8 PUSHPOW2	//  musd_p_ton rate nusdq_issued user_n addr users _132=256
+      DICTUSETB	//  musd_p_ton rate nusdq_issued users
+      s1 s3 XCHG	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  coins addr src nusdq_issued rate musd_p_ton users op in_msg
+    s8 POP	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP	//  in_msg addr src nusdq_issued rate musd_p_ton users op op
+    2 EQINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _136
+    IFJMP:<{	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+      DROP
+      s4 POP	//  in_msg addr users nusdq_issued rate musd_p_ton
+      s4 s3 PUSH2
+      8 PUSHPOW2	//  in_msg addr users nusdq_issued rate musd_p_ton addr users _139=256
+      DICTUGET
+      NULLSWAPIFNOT	//  in_msg addr users nusdq_issued rate musd_p_ton user success
+      100 THROWIFNOT
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton user
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq user
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq _375 _374
+      DROP	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq last_update
+      s0 s8 XCHG	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq in_msg
+      64 LDU	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq _377 _376
+      DROP	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq request_nusdq
+      TUCK	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton request_nusdq balance_nusdq request_nusdq
+      ADD	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton request_nusdq balance_nusdq
+      s5 s1 XCPU	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued request_nusdq
+      ADD	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued
+      s2 s3 PUSH2	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued balance_nton musd_p_ton
+      MUL	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued _162
+      1150000 PUSHINT	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued _162 _163=1150000
+      DIV	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued _164
+      s6 PUSH	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued _164 balance_nusdq
+      LEQ	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton request_nusdq nusdq_issued _165
+      100 THROWIF
+      s7 s1 PUXC	//  last_update addr users balance_nusdq rate musd_p_ton balance_nton nusdq_issued addr request_nusdq
+      send_usdq CALLDICT
+      SWAP
+      NEWC	//  last_update addr users balance_nusdq rate musd_p_ton nusdq_issued balance_nton _169
+      64 STU	//  last_update addr users balance_nusdq rate musd_p_ton nusdq_issued _171
+      s1 s4 XCHG	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq _171
+      64 STU	//  last_update addr users nusdq_issued rate musd_p_ton _173
+      s1 s6 XCHG	//  musd_p_ton addr users nusdq_issued rate last_update _173
+      64 STU	//  musd_p_ton addr users nusdq_issued rate user_n
+      s0 s4 s3 XCHG3
+      8 PUSHPOW2	//  musd_p_ton rate nusdq_issued user_n addr users _177=256
+      DICTUSETB	//  musd_p_ton rate nusdq_issued users
+      s1 s3 XCHG	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP	//  in_msg addr src nusdq_issued rate musd_p_ton users op op
+    3 EQINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _181
+    IFJMP:<{	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+      DROP
+      s4 POP	//  in_msg addr users nusdq_issued rate musd_p_ton
+      s4 s3 PUSH2
+      8 PUSHPOW2	//  in_msg addr users nusdq_issued rate musd_p_ton addr users _184=256
+      DICTUGET
+      NULLSWAPIFNOT	//  in_msg addr users nusdq_issued rate musd_p_ton user success
+      100 THROWIFNOT
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton user
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq user
+      64 LDU	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq _385 _384
+      DROP	//  in_msg addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq last_update
+      s0 s8 XCHG	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq in_msg
+      64 LDU	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq _387 _386
+      DROP	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq request_nton
+      s2 s2 XCPU	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton request_nton
+      SUB	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton
+      DUP	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton balance_nton
+      0 LESSINT	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _207
+      100 THROWIF
+      s0 s3 PUSH2	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton balance_nton musd_p_ton
+      MUL	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _210
+      1150000 PUSHINT	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _210 _211=1150000
+      DIV	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _212
+      s2 PUSH	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _212 balance_nusdq
+      LEQ	//  last_update addr users nusdq_issued rate musd_p_ton request_nton balance_nusdq balance_nton _213
+      101 THROWIF
+      s7 s2 PUXC	//  last_update addr users nusdq_issued rate musd_p_ton balance_nton balance_nusdq addr request_nton
+      send_ton CALLDICT
+      SWAP
+      NEWC	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq balance_nton _217
+      64 STU	//  last_update addr users nusdq_issued rate musd_p_ton balance_nusdq _219
+      64 STU	//  last_update addr users nusdq_issued rate musd_p_ton _221
+      s1 s6 XCHG	//  musd_p_ton addr users nusdq_issued rate last_update _221
+      64 STU	//  musd_p_ton addr users nusdq_issued rate user_n
+      s0 s4 s3 XCHG3
+      8 PUSHPOW2	//  musd_p_ton rate nusdq_issued user_n addr users _225=256
+      DICTUSETB	//  musd_p_ton rate nusdq_issued users
+      s1 s3 XCHG	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP	//  in_msg addr src nusdq_issued rate musd_p_ton users op op
+    10 EQINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _229
+    qbd_holders_addr CALLDICT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _229 _230
+    s8 s(-1) PUXC	//  in_msg addr src nusdq_issued rate musd_p_ton users op _229 addr _230
+    EQUAL	//  in_msg addr src nusdq_issued rate musd_p_ton users op _229 _231
+    AND	//  in_msg addr src nusdq_issued rate musd_p_ton users op _232
+    IFJMP:<{	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+      DROP
+      s2 POP
+      s3 POP
+      s3 POP	//  in_msg users musd_p_ton nusdq_issued
+      s0 s3 XCHG	//  nusdq_issued users musd_p_ton in_msg
+      32 LDU	//  nusdq_issued users musd_p_ton _389 _388
+      DROP	//  nusdq_issued users musd_p_ton rate
+      s0 s2 XCHG	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP	//  in_msg addr src nusdq_issued rate musd_p_ton users op op
+    11 EQINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _238
+    price_oracle_addr CALLDICT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _238 _239
+    s8 s(-1) PUXC	//  in_msg addr src nusdq_issued rate musd_p_ton users op _238 addr _239
+    EQUAL	//  in_msg addr src nusdq_issued rate musd_p_ton users op _238 _240
+    AND	//  in_msg addr src nusdq_issued rate musd_p_ton users op _241
+    IFJMP:<{	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+      DROP
+      NIP
+      s3 POP
+      s3 POP	//  in_msg rate users nusdq_issued
+      s0 s3 XCHG	//  nusdq_issued rate users in_msg
+      64 LDU	//  nusdq_issued rate users _391 _390
+      DROP	//  nusdq_issued rate users musd_p_ton
+      SWAP	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP
+    10000 PUSHINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op op _246=10000
+    EQUAL	//  in_msg addr src nusdq_issued rate musd_p_ton users op _247
+    qbd_holders_addr CALLDICT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _247 _248
+    s8 s(-1) PUXC	//  in_msg addr src nusdq_issued rate musd_p_ton users op _247 addr _248
+    EQUAL	//  in_msg addr src nusdq_issued rate musd_p_ton users op _247 _249
+    AND	//  in_msg addr src nusdq_issued rate musd_p_ton users op _250
+    IFJMP:<{	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+      7 BLKDROP	//  in_msg
+      LDREF	//  _393 _392
+      DROP	//  _251
+      c4 POP
+    }>	//  in_msg addr src nusdq_issued rate musd_p_ton users op
+    DUP
+    10001 PUSHINT	//  in_msg addr src nusdq_issued rate musd_p_ton users op op _254=10001
+    EQUAL	//  in_msg addr src nusdq_issued rate musd_p_ton users op _255
+    qbd_holders_addr CALLDICT	//  in_msg addr src nusdq_issued rate musd_p_ton users op _255 _256
+    s1 s8 XCHG	//  in_msg _255 src nusdq_issued rate musd_p_ton users op addr _256
+    EQUAL	//  in_msg _255 src nusdq_issued rate musd_p_ton users op _257
+    s1 s7 XCHG	//  in_msg op src nusdq_issued rate musd_p_ton users _255 _257
+    AND	//  in_msg op src nusdq_issued rate musd_p_ton users _258
+    IFJMP:<{	//  in_msg op src nusdq_issued rate musd_p_ton users
+      s4 POP
+      s4 POP	//  in_msg musd_p_ton users nusdq_issued rate
+      s0 s4 XCHG	//  rate musd_p_ton users nusdq_issued in_msg
+      LDREF	//  rate musd_p_ton users nusdq_issued _395 _394
+      DROP	//  rate musd_p_ton users nusdq_issued code
+      DUP	//  rate musd_p_ton users nusdq_issued code code
+      SETCODE
+      CTOS	//  rate musd_p_ton users nusdq_issued _263
+      BLESS	//  rate musd_p_ton users nusdq_issued _264
+      c3 POP
+      3 -ROLL	//  nusdq_issued rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg op src nusdq_issued rate musd_p_ton users
+    s0 s5 XCHG
+    2078119902 PUSHINT	//  in_msg users src nusdq_issued rate musd_p_ton op _267=2078119902
+    EQUAL	//  in_msg users src nusdq_issued rate musd_p_ton _268
+    IFJMP:<{	//  in_msg users src nusdq_issued rate musd_p_ton
+      s0 s5 XCHG	//  musd_p_ton users src nusdq_issued rate in_msg
+      64 LDU	//  musd_p_ton users src nusdq_issued rate _397 _396
+      NIP	//  musd_p_ton users src nusdq_issued rate in_msg
+      LDVARUINT16	//  musd_p_ton users src nusdq_issued rate nusdq_amount in_msg
+      LDMSGADDR	//  musd_p_ton users src nusdq_issued rate nusdq_amount _401 _400
+      DROP	//  musd_p_ton users src nusdq_issued rate nusdq_amount from_owner_addr
+      REWRITESTDADDR	//  musd_p_ton users src nusdq_issued rate nusdq_amount wid addr
+      SWAP	//  musd_p_ton users src nusdq_issued rate nusdq_amount addr wid
+      0 NEQINT	//  musd_p_ton users src nusdq_issued rate nusdq_amount addr _284
+      100 THROWIF
+      s0 s4 XCHG	//  musd_p_ton users addr nusdq_issued rate nusdq_amount src
+      HASHSU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287
+      MYADDR	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 _288
+      get_usdq_wallet_code CALLDICT	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 _288 _289
+      s6 PUSH
+      -ROT	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 addr _288 _289
+      get_usdq_wallet_addr_from_addr INLINECALLDICT	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 _290
+      ENDC	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 _291
+      HASHCU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _287 _292
+      NEQ	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _293
+      101 THROWIF
+      s2 s0 PUSH2	//  musd_p_ton users addr nusdq_issued rate nusdq_amount nusdq_issued nusdq_amount
+      LESS	//  musd_p_ton users addr nusdq_issued rate nusdq_amount _296
+      102 THROWIF
+      s3 s4 PUSH2
+      8 PUSHPOW2	//  musd_p_ton users addr nusdq_issued rate nusdq_amount addr users _300=256
+      DICTUGET
+      NULLSWAPIFNOT	//  musd_p_ton users addr nusdq_issued rate nusdq_amount user success
+      IF:<{	//  musd_p_ton users addr nusdq_issued rate nusdq_amount user
+        64 LDU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton user
+        64 LDU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton balance_nusdq user
+        64 LDU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton balance_nusdq _411 _410
+        DROP	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton balance_nusdq last_update
+        0 PUSHINT	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton balance_nusdq last_update _314=0
+        s2 s4 XCPU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton _314=0 last_update balance_nusdq nusdq_amount
+        SUB	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton _314=0 last_update _315
+        s1 s2 XCHG	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton last_update _314=0 _315
+        MAX	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nton last_update balance_nusdq
+        s0 s2 XCHG
+        NEWC	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nusdq last_update balance_nton _318
+        64 STU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount balance_nusdq last_update _320
+        s1 s2 XCHG	//  musd_p_ton users addr nusdq_issued rate nusdq_amount last_update balance_nusdq _320
+        64 STU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount last_update _322
+        64 STU	//  musd_p_ton users addr nusdq_issued rate nusdq_amount user_n
+        s0 s4 s5 XCHG3
+        8 PUSHPOW2	//  musd_p_ton rate nusdq_amount nusdq_issued user_n addr users _326=256
+        DICTUSETB	//  musd_p_ton rate nusdq_amount nusdq_issued users
+        s0 s3 XCHG	//  musd_p_ton users nusdq_amount nusdq_issued rate
+      }>ELSE<{
+        DROP
+        s3 POP	//  musd_p_ton users nusdq_amount nusdq_issued rate
+      }>
+      s0 s2 XCHG	//  musd_p_ton users rate nusdq_issued nusdq_amount
+      SUB	//  musd_p_ton users rate _328
+      s1 s3 s3 XCHG3	//  _328 rate musd_p_ton users
+      save_contract CALLDICT
+    }>	//  in_msg users src nusdq_issued rate musd_p_ton
+    6 BLKDROP	// 
+  }>
+  recv_external PROC:<{
+    //  in_msg
+    DROP	// 
+    BALANCE	//  _3
+    UNPAIR	//  _8 _9
+    DROP	//  balance
+    100000000 PUSHINT	//  balance _5=100000000
+    LEQ	//  _6
+    IF:<{	// 
+      ACCEPT
+    }>	// 
+  }>
+}END>c
+boc>B "build/boc/contract.boc" B>file

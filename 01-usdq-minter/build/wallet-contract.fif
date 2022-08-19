@@ -1,0 +1,559 @@
+"Asm.fif" include
+// automatically generated from `C:\Users\Tigr\AppData\Local\toncli\toncli\func-libs\stdlib-tests.func` `D:\TON_FunC\qubedao-repo\01-usdq-minter\func\usdq-wallet.fc` incl:`func/usdq-as-jetton.fc` incl:`func/stdlib-ext.fc` 
+PROGRAM{
+  97986 DECLMETHOD swap_remove
+  80537 DECLMETHOD parse_one_action
+  120686 DECLMETHOD get_usdq_jetton_content
+  73706 DECLMETHOD get_usdq_wallet_data
+  130065 DECLMETHOD get_usdq_wallet_state_init
+  92542 DECLMETHOD get_usdq_wallet_addr
+  78362 DECLMETHOD get_usdq_wallet_addr_from_addr
+  127004 DECLMETHOD build_usdq_wallet_master_msg_incoming
+  95602 DECLMETHOD build_usdq_wallet_msg_body_incoming
+  DECLPROC load_data
+  DECLPROC save_data
+  DECLPROC send_stables
+  DECLPROC recv_stables
+  DECLPROC burn_stables
+  DECLPROC on_bounce
+  DECLPROC recv_internal
+  97026 DECLMETHOD get_wallet_data
+  swap_remove PROC:<{
+    //  t index
+    OVER	//  t index t
+    TLEN	//  t index _3
+    DEC	//  t index l
+    s1 s(-1) PUXC	//  t index index l
+    EQUAL	//  t index _6
+    IFJMP:<{	//  t index
+      DROP	//  t
+      TPOP	//  t value
+    }>	//  t index
+    2DUP	//  t index t index
+    INDEXVAR	//  t index value
+    s0 s2 XCHG	//  value index t
+    TPOP	//  value index t _12
+    s1 s2 XCHG	//  value t index _12
+    SETINDEXVAR	//  value t
+    SWAP	//  t value
+  }>
+  parse_one_action PROC:<{
+    //  actions
+    LDREF	//  previous actions
+    32 LDU	//  previous action_id actions
+    SWAP	//  previous actions action_id
+    s0 DUMP	//  previous actions action_id
+    DUP
+    247711853 PUSHINT	//  previous actions action_id action_id _10=247711853
+    EQUAL	//  previous actions action_id _11
+    IF:<{	//  previous actions action_id
+      DROP	//  previous actions
+      4445 PUSHINT	//  previous actions _12=4445
+      s0 DUMP	//  previous actions _13
+      DROP	//  previous actions
+      1397050948 PUSHINT	//  previous actions _14=1397050948
+      s0 DUMP	//  previous actions _15
+      DROP	//  previous actions
+      8 LDU	//  previous _16 actions
+      SWAP	//  previous actions _16
+      s0 DUMP	//  previous actions _19
+      DROP	//  previous actions
+      LDREF	//  previous _55 _54
+      DROP	//  previous _20
+      s0 DUMP	//  previous _22
+      DROP	//  previous
+    }>ELSE<{	//  previous actions action_id
+      DUP
+      2907562126 PUSHINT	//  previous actions action_id action_id _23=2907562126
+      EQUAL	//  previous actions action_id _24
+      IF:<{	//  previous actions action_id
+        DROP	//  previous actions
+        4445 PUSHINT	//  previous actions _25=4445
+        s0 DUMP	//  previous actions _26
+        DROP	//  previous actions
+        23438651275822149 PUSHINT	//  previous actions _27=23438651275822149
+        s0 DUMP	//  previous actions _28
+        DROP	//  previous actions
+        LDREF	//  previous _57 _56
+        DROP	//  previous _29
+        s0 DUMP	//  previous _31
+        DROP	//  previous
+      }>ELSE<{	//  previous actions action_id
+        921090057 PUSHINT	//  previous actions action_id _32=921090057
+        EQUAL	//  previous actions _33
+        IF:<{	//  previous actions
+          4445 PUSHINT	//  previous actions _34=4445
+          s0 DUMP	//  previous actions _35
+          DROP	//  previous actions
+          23157172037899845 PUSHINT	//  previous actions _36=23157172037899845
+          s0 DUMP	//  previous actions _37
+          DROP	//  previous actions
+          8 LDU	//  previous _38 actions
+          SWAP	//  previous actions _38
+          s0 DUMP	//  previous actions _41
+          DROP	//  previous actions
+          LDDICT	//  previous _61 _60
+          DROP	//  previous _42
+          s0 DUMP	//  previous _44
+          DROP	//  previous
+        }>ELSE<{	//  previous actions
+          DROP	//  previous
+          100 THROW
+        }>
+      }>
+    }>
+    CTOS	//  _47
+  }>
+  get_usdq_jetton_content PROC:<{
+    // 
+    235629877659761281780625421800533870 PUSHINT	//  _0=235629877659761281780625421800533870
+    45406873707674611466187312695969843437010076133414249170208066351564980446321 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321
+    50399639963717701463601153999043190439242674004441620318968268883439683778869 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869
+    636868685092637875018676025462067355155571762704951223135721953953328672355 PUSHINT	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _3=636868685092637875018676025462067355155571762704951223135721953953328672355
+    NEWC	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _3=636868685092637875018676025462067355155571762704951223135721953953328672355 _4
+    256 STU	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _2=50399639963717701463601153999043190439242674004441620318968268883439683778869 _6
+    256 STU	//  _0=235629877659761281780625421800533870 _1=45406873707674611466187312695969843437010076133414249170208066351564980446321 _8
+    256 STU	//  _0=235629877659761281780625421800533870 _10
+    120 STU	//  _12
+    ENDC	//  _13
+  }>
+  get_usdq_wallet_data PROC:<{
+    //  balance owner_address master_address usdq_wallet_code
+    NEWC	//  balance owner_address master_address usdq_wallet_code _4
+    s0 s4 XCHG2	//  usdq_wallet_code owner_address master_address _4 balance
+    STVARUINT16	//  usdq_wallet_code owner_address master_address _5
+    ROT	//  usdq_wallet_code master_address _5 owner_address
+    STSLICER	//  usdq_wallet_code master_address _6
+    SWAP	//  usdq_wallet_code _6 master_address
+    STSLICER	//  usdq_wallet_code _7
+    STREF	//  _8
+    ENDC	//  _9
+  }>
+  get_usdq_wallet_state_init PROC:<{
+    //  owner_address master_address usdq_wallet_code
+    0 PUSHINT	//  owner_address master_address usdq_wallet_code _3=0
+    s3 s2 s3 XC2PU	//  usdq_wallet_code _3=0 owner_address master_address usdq_wallet_code
+    get_usdq_wallet_data INLINECALLDICT	//  usdq_wallet_code _4
+    6 PUSHINT	//  usdq_wallet_code _4 _5=6
+    NEWC	//  usdq_wallet_code _4 _5=6 _6
+    5 STU	//  usdq_wallet_code _4 _8
+    s1 s2 XCHG	//  _4 usdq_wallet_code _8
+    STREF	//  _4 _9
+    STREF	//  _10
+    ENDC	//  _11
+  }>
+  get_usdq_wallet_addr PROC:<{
+    //  state_init
+    HASHCU	//  _1
+    10 PUSHPOW2	//  _1 _2=1024
+    NEWC	//  _1 _2=1024 _3
+    11 STU	//  _1 _5
+    256 STU	//  _7
+  }>
+  get_usdq_wallet_addr_from_addr PROC:<{
+    //  owner_address master_address usdq_wallet_code
+    10 PUSHPOW2	//  owner_address master_address usdq_wallet_code _3=1024
+    NEWC	//  owner_address master_address usdq_wallet_code _3=1024 _4
+    11 STU	//  owner_address master_address usdq_wallet_code _6
+    s1 s3 XCHG	//  usdq_wallet_code master_address owner_address _6
+    256 STU	//  usdq_wallet_code master_address _8
+    ENDC	//  usdq_wallet_code master_address _9
+    CTOS	//  usdq_wallet_code master_address _10
+    s0 s2 XCHG	//  _10 master_address usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  _11
+    get_usdq_wallet_addr INLINECALLDICT	//  _12
+  }>
+  build_usdq_wallet_master_msg_incoming PROC:<{
+    //  addr nusdq_amount usdq_wallet_code master_address
+    10 PUSHPOW2	//  addr nusdq_amount usdq_wallet_code master_address _5=1024
+    NEWC	//  addr nusdq_amount usdq_wallet_code master_address _5=1024 _6
+    11 STU	//  addr nusdq_amount usdq_wallet_code master_address _8
+    s1 s4 XCHG	//  master_address nusdq_amount usdq_wallet_code addr _8
+    256 STU	//  master_address nusdq_amount usdq_wallet_code _10
+    ENDC	//  master_address nusdq_amount usdq_wallet_code _11
+    CTOS	//  master_address nusdq_amount usdq_wallet_code _12
+    s0 s3 s3 XCHG3	//  nusdq_amount _12 master_address usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  nusdq_amount state_init
+    NEWDICT	//  nusdq_amount state_init _14
+    0 PUSHINT	//  nusdq_amount state_init _14 _15=0
+    64 PUSHPOW2	//  nusdq_amount state_init _14 _15=0 _18
+    RAND	//  nusdq_amount state_init _14 _15=0 _19
+    395134233 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233
+    6 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6
+    s5 PUSH	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 state_init
+    get_usdq_wallet_addr INLINECALLDICT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22
+    24 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _23=24
+    NEWC	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _23=24 _24
+    6 STU	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _22 _26
+    STB	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _27
+    10000000 PUSHINT	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _27 _28=10000000
+    STVARUINT16	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _21=6 _29
+    108 STU	//  nusdq_amount state_init _14 _15=0 _19 _20=395134233 _43
+    s1 s5 XCHG	//  nusdq_amount _20=395134233 _14 _15=0 _19 state_init _43
+    STREF	//  nusdq_amount _20=395134233 _14 _15=0 _19 _44
+    s1 s4 XCHG	//  nusdq_amount _19 _14 _15=0 _20=395134233 _44
+    32 STU	//  nusdq_amount _19 _14 _15=0 _46
+    s1 s3 XCHG	//  nusdq_amount _15=0 _14 _19 _46
+    64 STU	//  nusdq_amount _15=0 _14 _48
+    s0 s3 XCHG2	//  _14 _15=0 _48 nusdq_amount
+    STVARUINT16	//  _14 _15=0 _49
+    4 STU	//  _14 _51
+    0 PUSHINT	//  _14 _51 _52=0
+    STVARUINT16	//  _14 _53
+    STDICT	//  _54
+    ENDC	//  _55
+  }>
+  build_usdq_wallet_msg_body_incoming PROC:<{
+    //  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload
+    395134233 PUSHINT	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _6=395134233
+    NEWC	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _6=395134233 _7
+    32 STU	//  query_id nusdq_amount from_owner_addr response_addr forward_ton_amount either_forward_payload _9
+    s1 s6 XCHG	//  either_forward_payload nusdq_amount from_owner_addr response_addr forward_ton_amount query_id _9
+    64 STU	//  either_forward_payload nusdq_amount from_owner_addr response_addr forward_ton_amount _11
+    s0 s4 XCHG2	//  either_forward_payload forward_ton_amount from_owner_addr response_addr _11 nusdq_amount
+    STVARUINT16	//  either_forward_payload forward_ton_amount from_owner_addr response_addr _12
+    ROT	//  either_forward_payload forward_ton_amount response_addr _12 from_owner_addr
+    STSLICER	//  either_forward_payload forward_ton_amount response_addr _13
+    SWAP	//  either_forward_payload forward_ton_amount _13 response_addr
+    STSLICER	//  either_forward_payload forward_ton_amount _14
+    SWAP	//  either_forward_payload _14 forward_ton_amount
+    STVARUINT16	//  either_forward_payload _15
+    SWAP	//  _15 either_forward_payload
+    STSLICER	//  _16
+  }>
+  load_data PROC:<{
+    // 
+    c4 PUSH	//  _1
+    CTOS	//  ds
+    LDVARUINT16	//  _3 ds
+    LDMSGADDR	//  _3 _5 ds
+    LDMSGADDR	//  _3 _5 _7 ds
+    LDREF	//  _3 _5 _7 _18 _17
+    DROP	//  _3 _5 _7 _9
+  }>
+  save_data PROC:<{
+    //  balance owner_addr master_addr usdq_wallet_code
+    get_usdq_wallet_data INLINECALLDICT	//  _4
+    c4 POP
+  }>
+  send_stables PROC:<{
+    //  in_msg_body sender_addr msg_value fwd_fee
+    s0 s3 XCHG	//  fwd_fee sender_addr msg_value in_msg_body
+    64 LDU	//  fwd_fee sender_addr msg_value query_id in_msg_body
+    LDVARUINT16	//  fwd_fee sender_addr msg_value query_id nusdq_amount in_msg_body
+    LDMSGADDR	//  fwd_fee sender_addr msg_value query_id nusdq_amount to_owner_addr in_msg_body
+    load_data CALLDICT	//  fwd_fee sender_addr msg_value query_id nusdq_amount to_owner_addr in_msg_body balance owner_addr master_addr usdq_wallet_code
+    s2 s9 PUXC	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body balance owner_addr master_addr owner_addr sender_addr
+    SDEQ	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body balance owner_addr master_addr _20
+    100 THROWIFNOT
+    s2 s5 XCPU	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body master_addr owner_addr balance nusdq_amount
+    SUB	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body master_addr owner_addr balance
+    DUP	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body master_addr owner_addr balance balance
+    -1 GTINT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount to_owner_addr in_msg_body master_addr owner_addr balance _25
+    101 THROWIFNOT
+    s4 s2 s8 XCPU2	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance in_msg_body master_addr owner_addr to_owner_addr master_addr usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance in_msg_body master_addr owner_addr state_init
+    DUP	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance in_msg_body master_addr owner_addr state_init state_init
+    get_usdq_wallet_addr INLINECALLDICT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance in_msg_body master_addr owner_addr state_init to_wallet_addr
+    s0 s4 XCHG	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init in_msg_body
+    LDMSGADDR	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr in_msg_body
+    LDDICT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr _107 _106
+    NIP	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr in_msg_body
+    LDVARUINT16	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body
+    OVER	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body forward_ton_amt
+    IF:<{	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body
+      2 PUSHINT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body _41=2
+    }>ELSE<{	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body
+      1 PUSHINT	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body _41=1
+    }>	//  fwd_fee usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt in_msg_body fwd_count
+    s0 s13 XCHG2	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt fwd_count fwd_fee
+    MUL	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _45
+    s1 s(-1) PUXC	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt forward_ton_amt _45
+    ADD	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _46
+    10000000 PUSHINT	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _46 _48
+    1 LSHIFT#	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _46 _49
+    10000000 PUSHINT	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _46 _49 _50
+    ADD	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _46 _51
+    ADD	//  in_msg_body usdq_wallet_code msg_value query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr forward_ton_amt _52
+    s1 s10 XCHG	//  in_msg_body usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr msg_value _52
+    LEQ	//  in_msg_body usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr _53
+    102 THROWIF
+    s10 PUSH	//  in_msg_body usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr in_msg_body
+    SBITS	//  in_msg_body usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr _56
+    1 LESSINT	//  in_msg_body usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr _58
+    103 THROWIF	//  either_forward_payload usdq_wallet_code forward_ton_amt query_id nusdq_amount balance to_wallet_addr master_addr owner_addr state_init response_addr
+    s2 PUSH
+    s5 s8 XCHG
+    s4 s7 XCHG
+    s1 s9 s11 XCHG3	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance query_id nusdq_amount owner_addr response_addr forward_ton_amt either_forward_payload
+    build_usdq_wallet_msg_body_incoming CALLDICT	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _62
+    ENDC	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _63
+    7 PUSHINT	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _63 _64=7
+    24 PUSHINT	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _63 _64=7 _65=24
+    NEWC	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _63 _64=7 _65=24 _66
+    6 STU	//  owner_addr usdq_wallet_code state_init to_wallet_addr master_addr balance _63 _64=7 _68
+    s1 s5 XCHG	//  owner_addr usdq_wallet_code state_init _64=7 master_addr balance _63 to_wallet_addr _68
+    STB	//  owner_addr usdq_wallet_code state_init _64=7 master_addr balance _63 _69
+    0 PUSHINT	//  owner_addr usdq_wallet_code state_init _64=7 master_addr balance _63 _69 _70=0
+    STVARUINT16	//  owner_addr usdq_wallet_code state_init _64=7 master_addr balance _63 _71
+    s1 s4 XCHG	//  owner_addr usdq_wallet_code state_init _63 master_addr balance _64=7 _71
+    108 STU	//  owner_addr usdq_wallet_code state_init _63 master_addr balance _87
+    s1 s4 XCHG	//  owner_addr usdq_wallet_code balance _63 master_addr state_init _87
+    STREF	//  owner_addr usdq_wallet_code balance _63 master_addr _88
+    s1 s2 XCHG	//  owner_addr usdq_wallet_code balance master_addr _63 _88
+    STREF	//  owner_addr usdq_wallet_code balance master_addr _89
+    ENDC	//  owner_addr usdq_wallet_code balance master_addr msg
+    64 PUSHINT	//  owner_addr usdq_wallet_code balance master_addr msg _91=64
+    SENDRAWMSG
+    s3 s0 s3 XCHG3	//  balance owner_addr master_addr usdq_wallet_code
+    save_data INLINECALLDICT
+  }>
+  recv_stables PROC:<{
+    //  in_msg_body sender_addr my_ton_balance fwd_fee msg_value
+    load_data CALLDICT	//  in_msg_body sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr usdq_wallet_code
+    s0 s8 XCHG	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr in_msg_body
+    64 LDU	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id in_msg_body
+    LDVARUINT16	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount in_msg_body
+    s5 s1 XCPU	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value in_msg_body owner_addr master_addr query_id nusdq_amount balance nusdq_amount
+    ADD	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value in_msg_body owner_addr master_addr query_id nusdq_amount balance
+    s0 s5 XCHG	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount in_msg_body
+    LDMSGADDR	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr in_msg_body
+    LDMSGADDR	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body
+    s5 s11 PUSH2	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body master_addr sender_addr
+    SDEQ	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25
+    s3 s6 s13 PUSH3	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25 from_addr master_addr usdq_wallet_code
+    get_usdq_wallet_state_init INLINECALLDICT	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25 _26
+    get_usdq_wallet_addr INLINECALLDICT	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25 _27
+    ENDC	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25 _28
+    CTOS	//  usdq_wallet_code sender_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _25 _29
+    s0 s13 XCHG2	//  usdq_wallet_code _25 my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _29 sender_addr
+    SDEQ	//  usdq_wallet_code _25 my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr in_msg_body _30
+    s1 s12 XCHG	//  usdq_wallet_code in_msg_body my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr _25 _30
+    OR	//  usdq_wallet_code in_msg_body my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr response_addr _31
+    104 THROWIFNOT
+    s0 s10 XCHG	//  usdq_wallet_code response_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr in_msg_body
+    LDVARUINT16	//  usdq_wallet_code response_addr my_ton_balance fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt in_msg_body
+    s10 s8 XCPU	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt my_ton_balance msg_value
+    SUB	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt ton_balance_before_msg
+    10000000 PUSHINT	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt ton_balance_before_msg _39
+    SWAP	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt _39 ton_balance_before_msg
+    SUB	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt _40
+    0 PUSHINT	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt _40 _41=0
+    MAX	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt storage_fee
+    10000000 PUSHINT	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt storage_fee _43
+    ADD	//  usdq_wallet_code response_addr in_msg_body fwd_fee msg_value balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt _44
+    s1 s8 XCHG	//  usdq_wallet_code response_addr in_msg_body fwd_fee forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr msg_value _44
+    SUB	//  usdq_wallet_code response_addr in_msg_body fwd_fee forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr msg_value
+    s7 PUSH	//  usdq_wallet_code response_addr in_msg_body fwd_fee forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr msg_value forward_ton_amt
+    IF:<{	//  usdq_wallet_code response_addr in_msg_body fwd_fee forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr msg_value
+      s7 s8 PUXC	//  usdq_wallet_code response_addr in_msg_body msg_value forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr forward_ton_amt fwd_fee
+      ADD	//  usdq_wallet_code response_addr in_msg_body msg_value forward_ton_amt balance owner_addr master_addr query_id nusdq_amount from_addr _46
+      s1 s8 XCHG	//  usdq_wallet_code response_addr in_msg_body from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value _46
+      SUB	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value
+      1935855772 PUSHINT	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value _50=1935855772
+      NEWC	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value _50=1935855772 _51
+      32 STU	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value _53
+      s3 s(-1) PUXC	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value query_id _53
+      64 STU	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id nusdq_amount msg_value _55
+      ROT	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id msg_value _55 nusdq_amount
+      STVARUINT16	//  usdq_wallet_code response_addr either_forward_payload from_addr forward_ton_amt balance owner_addr master_addr query_id msg_value _56
+      s0 s7 XCHG2	//  usdq_wallet_code response_addr either_forward_payload msg_value forward_ton_amt balance owner_addr master_addr query_id _56 from_addr
+      STSLICER	//  usdq_wallet_code response_addr either_forward_payload msg_value forward_ton_amt balance owner_addr master_addr query_id _57
+      s0 s7 XCHG2	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr _57 either_forward_payload
+      STSLICER	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr _58
+      ENDC	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body
+      1 PUSHINT	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1
+      16 PUSHINT	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1 _62=16
+      NEWC	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1 _62=16 _63
+      6 STU	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1 _65
+      s4 PUSH	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1 _65 owner_addr
+      STSLICER	//  usdq_wallet_code response_addr query_id msg_value forward_ton_amt balance owner_addr master_addr msg_body _61=1 _66
+      s0 s6 XCHG2	//  usdq_wallet_code response_addr query_id msg_value _61=1 balance owner_addr master_addr msg_body _66 forward_ton_amt
+      STVARUINT16	//  usdq_wallet_code response_addr query_id msg_value _61=1 balance owner_addr master_addr msg_body _67
+      s1 s5 XCHG	//  usdq_wallet_code response_addr query_id msg_value msg_body balance owner_addr master_addr _61=1 _67
+      107 STU	//  usdq_wallet_code response_addr query_id msg_value msg_body balance owner_addr master_addr _81
+      s1 s4 XCHG	//  usdq_wallet_code response_addr query_id msg_value master_addr balance owner_addr msg_body _81
+      STREF	//  usdq_wallet_code response_addr query_id msg_value master_addr balance owner_addr msg
+      ENDC	//  usdq_wallet_code response_addr query_id msg_value master_addr balance owner_addr _83
+      1 PUSHINT	//  usdq_wallet_code response_addr query_id msg_value master_addr balance owner_addr _83 _84=1
+      SENDRAWMSG
+      s2 s4 XCHG
+      s2 s3 XCHG	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr
+    }>ELSE<{
+      s4 s9 XCHG
+      s3 s8 XCHG
+      s7 POP
+      4 BLKDROP	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr
+    }>
+    s5 PUSH	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr response_addr
+    2 PLDU	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _87
+    0 NEQINT	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _89
+    s3 PUSH	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _89 msg_value
+    0 GTINT	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _89 _91
+    AND	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _92
+    IF:<{	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr
+      3576854235 PUSHINT	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _94=3576854235
+      0 PUSHINT	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _94=3576854235 _95=0
+      16 PUSHINT	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _94=3576854235 _95=0 _96=16
+      NEWC	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _94=3576854235 _95=0 _96=16 _97
+      6 STU	//  usdq_wallet_code response_addr master_addr query_id msg_value balance owner_addr _94=3576854235 _95=0 _99
+      s0 s8 XCHG2	//  usdq_wallet_code _95=0 master_addr query_id msg_value balance owner_addr _94=3576854235 _99 response_addr
+      STSLICER	//  usdq_wallet_code _95=0 master_addr query_id msg_value balance owner_addr _94=3576854235 _100
+      s0 s4 XCHG2	//  usdq_wallet_code _95=0 master_addr query_id _94=3576854235 balance owner_addr _100 msg_value
+      STVARUINT16	//  usdq_wallet_code _95=0 master_addr query_id _94=3576854235 balance owner_addr _101
+      s1 s6 XCHG	//  usdq_wallet_code owner_addr master_addr query_id _94=3576854235 balance _95=0 _101
+      107 STU	//  usdq_wallet_code owner_addr master_addr query_id _94=3576854235 balance _115
+      s1 s2 XCHG	//  usdq_wallet_code owner_addr master_addr query_id balance _94=3576854235 _115
+      32 STU	//  usdq_wallet_code owner_addr master_addr query_id balance _117
+      s1 s2 XCHG	//  usdq_wallet_code owner_addr master_addr balance query_id _117
+      64 STU	//  usdq_wallet_code owner_addr master_addr balance msg
+      ENDC	//  usdq_wallet_code owner_addr master_addr balance _120
+      2 PUSHINT	//  usdq_wallet_code owner_addr master_addr balance _120 _121=2
+      SENDRAWMSG
+    }>ELSE<{
+      s5 POP
+      2 1 BLKDROP2	//  usdq_wallet_code owner_addr master_addr balance
+    }>
+    s0 s3 XCHG	//  balance owner_addr master_addr usdq_wallet_code
+    save_data INLINECALLDICT
+  }>
+  burn_stables PROC:<{
+    //  in_msg_body sender_addr msg_value fwd_fee
+    load_data CALLDICT	//  in_msg_body sender_addr msg_value fwd_fee balance owner_addr master_addr usdq_wallet_code
+    s0 s7 XCHG	//  usdq_wallet_code sender_addr msg_value fwd_fee balance owner_addr master_addr in_msg_body
+    64 LDU	//  usdq_wallet_code sender_addr msg_value fwd_fee balance owner_addr master_addr query_id in_msg_body
+    LDVARUINT16	//  usdq_wallet_code sender_addr msg_value fwd_fee balance owner_addr master_addr query_id nusdq_amount in_msg_body
+    LDMSGADDR	//  usdq_wallet_code sender_addr msg_value fwd_fee balance owner_addr master_addr query_id nusdq_amount _82 _81
+    DROP	//  usdq_wallet_code sender_addr msg_value fwd_fee balance owner_addr master_addr query_id nusdq_amount response_addr
+    s5 s1 XCPU	//  usdq_wallet_code sender_addr msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount balance nusdq_amount
+    SUB	//  usdq_wallet_code sender_addr msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount balance
+    s4 s8 PUXC	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount owner_addr sender_addr
+    SDEQ	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount _21
+    105 THROWIFNOT
+    s7 PUSH	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount balance
+    -1 GTINT	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount _25
+    106 THROWIFNOT
+    10000000 PUSHINT	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount _29
+    1 LSHIFT#	//  usdq_wallet_code balance msg_value fwd_fee response_addr owner_addr master_addr query_id nusdq_amount _30
+    s1 s6 XCHG	//  usdq_wallet_code balance msg_value nusdq_amount response_addr owner_addr master_addr query_id fwd_fee _30
+    ADD	//  usdq_wallet_code balance msg_value nusdq_amount response_addr owner_addr master_addr query_id _31
+    s1 s6 XCHG	//  usdq_wallet_code balance query_id nusdq_amount response_addr owner_addr master_addr msg_value _31
+    GREATER	//  usdq_wallet_code balance query_id nusdq_amount response_addr owner_addr master_addr _32
+    107 THROWIFNOT
+    2078119902 PUSHINT	//  usdq_wallet_code balance query_id nusdq_amount response_addr owner_addr master_addr _35=2078119902
+    NEWC	//  usdq_wallet_code balance query_id nusdq_amount response_addr owner_addr master_addr _35=2078119902 _36
+    32 STU	//  usdq_wallet_code balance query_id nusdq_amount response_addr owner_addr master_addr _38
+    s1 s5 XCHG	//  usdq_wallet_code balance master_addr nusdq_amount response_addr owner_addr query_id _38
+    64 STU	//  usdq_wallet_code balance master_addr nusdq_amount response_addr owner_addr _40
+    s0 s3 XCHG2	//  usdq_wallet_code balance master_addr owner_addr response_addr _40 nusdq_amount
+    STVARUINT16	//  usdq_wallet_code balance master_addr owner_addr response_addr _41
+    s2 PUSH	//  usdq_wallet_code balance master_addr owner_addr response_addr _41 owner_addr
+    STSLICER	//  usdq_wallet_code balance master_addr owner_addr response_addr _42
+    SWAP	//  usdq_wallet_code balance master_addr owner_addr _42 response_addr
+    STSLICER	//  usdq_wallet_code balance master_addr owner_addr _43
+    ENDC	//  usdq_wallet_code balance master_addr owner_addr msg_body
+    1 PUSHINT	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1
+    24 PUSHINT	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _47=24
+    NEWC	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _47=24 _48
+    6 STU	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _50
+    s4 PUSH	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _50 master_addr
+    STSLICER	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _51
+    0 PUSHINT	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _51 _52=0
+    STVARUINT16	//  usdq_wallet_code balance master_addr owner_addr msg_body _46=1 _53
+    107 STU	//  usdq_wallet_code balance master_addr owner_addr msg_body _67
+    STREF	//  usdq_wallet_code balance master_addr owner_addr msg
+    ENDC	//  usdq_wallet_code balance master_addr owner_addr _69
+    64 PUSHINT	//  usdq_wallet_code balance master_addr owner_addr _69 _70=64
+    SENDRAWMSG
+    s0 s1 s3 XCHG3	//  balance owner_addr master_addr usdq_wallet_code
+    save_data INLINECALLDICT
+  }>
+  on_bounce PROC:<{
+    //  in_msg_body
+    32 PUSHINT	//  in_msg_body _2=32
+    SDSKIPFIRST	//  in_msg_body
+    32 LDU	//  op in_msg_body
+    OVER
+    395134233 PUSHINT	//  op in_msg_body op _9=395134233
+    EQUAL	//  op in_msg_body _10
+    s0 s2 XCHG
+    2078119902 PUSHINT	//  _10 in_msg_body op _11=2078119902
+    EQUAL	//  _10 in_msg_body _12
+    s1 s2 XCHG	//  in_msg_body _10 _12
+    OR	//  in_msg_body _13
+    108 THROWIFNOT
+    64 LDU	//  _32 _31
+    NIP	//  in_msg_body
+    LDVARUINT16	//  _34 _33
+    DROP	//  nusdq_amount
+    load_data CALLDICT	//  nusdq_amount balance owner_addr master_addr usdq_wallet_code
+    s3 s4 XCHG2	//  usdq_wallet_code master_addr owner_addr balance nusdq_amount
+    ADD	//  usdq_wallet_code master_addr owner_addr balance
+    s2 s3 XCHG2	//  balance owner_addr master_addr usdq_wallet_code
+    save_data INLINECALLDICT
+  }>
+  recv_internal PROC:<{
+    //  my_balance msg_value in_msg_full in_msg_body
+    DUP	//  my_balance msg_value in_msg_full in_msg_body in_msg_body
+    SBITS	//  my_balance msg_value in_msg_full in_msg_body _4
+    32 LESSINT	//  my_balance msg_value in_msg_full in_msg_body _6
+    IFJMP:<{	//  my_balance msg_value in_msg_full in_msg_body
+      4 BLKDROP	// 
+    }>	//  my_balance msg_value in_msg_full in_msg_body
+    SWAP	//  my_balance msg_value in_msg_body in_msg_full
+    CTOS	//  my_balance msg_value in_msg_body in_msg_full
+    4 LDU	//  my_balance msg_value in_msg_body _9 in_msg_full
+    SWAP
+    1 PUSHINT	//  my_balance msg_value in_msg_body in_msg_full _9 _12=1
+    AND	//  my_balance msg_value in_msg_body in_msg_full _13
+    IFJMP:<{	//  my_balance msg_value in_msg_body in_msg_full
+      s1 s3 XCHG
+      3 BLKDROP	//  in_msg_body
+      on_bounce CALLDICT
+    }>	//  my_balance msg_value in_msg_body in_msg_full
+    LDMSGADDR	//  my_balance msg_value in_msg_body sender_addr in_msg_full
+    LDMSGADDR	//  my_balance msg_value in_msg_body sender_addr _47 _46
+    NIP	//  my_balance msg_value in_msg_body sender_addr in_msg_full
+    LDVARUINT16	//  my_balance msg_value in_msg_body sender_addr _49 _48
+    NIP	//  my_balance msg_value in_msg_body sender_addr in_msg_full
+    LDDICT	//  my_balance msg_value in_msg_body sender_addr _51 _50
+    NIP	//  my_balance msg_value in_msg_body sender_addr in_msg_full
+    LDVARUINT16	//  my_balance msg_value in_msg_body sender_addr _53 _52
+    NIP	//  my_balance msg_value in_msg_body sender_addr in_msg_full
+    LDVARUINT16	//  my_balance msg_value in_msg_body sender_addr _55 _54
+    DROP	//  my_balance msg_value in_msg_body sender_addr fwd_fee
+    s0 s2 XCHG	//  my_balance msg_value fwd_fee sender_addr in_msg_body
+    32 LDU	//  my_balance msg_value fwd_fee sender_addr op in_msg_body
+    OVER
+    260734629 PUSHINT	//  my_balance msg_value fwd_fee sender_addr op in_msg_body op _33=260734629
+    EQUAL	//  my_balance msg_value fwd_fee sender_addr op in_msg_body _34
+    IFJMP:<{	//  my_balance msg_value fwd_fee sender_addr op in_msg_body
+      NIP
+      s4 POP	//  in_msg_body msg_value fwd_fee sender_addr
+      -ROT	//  in_msg_body sender_addr msg_value fwd_fee
+      send_stables CALLDICT
+    }>	//  my_balance msg_value fwd_fee sender_addr op in_msg_body
+    OVER
+    395134233 PUSHINT	//  my_balance msg_value fwd_fee sender_addr op in_msg_body op _36=395134233
+    EQUAL	//  my_balance msg_value fwd_fee sender_addr op in_msg_body _37
+    IFJMP:<{	//  my_balance msg_value fwd_fee sender_addr op in_msg_body
+      NIP	//  my_balance msg_value fwd_fee sender_addr in_msg_body
+      s4 s4 s4 XCHG3
+      s0 s3 XCHG	//  in_msg_body sender_addr my_balance fwd_fee msg_value
+      recv_stables CALLDICT
+    }>	//  my_balance msg_value fwd_fee sender_addr op in_msg_body
+    s5 POP	//  in_msg_body msg_value fwd_fee sender_addr op
+    1499400124 PUSHINT	//  in_msg_body msg_value fwd_fee sender_addr op _39=1499400124
+    EQUAL	//  in_msg_body msg_value fwd_fee sender_addr _40
+    IFJMP:<{	//  in_msg_body msg_value fwd_fee sender_addr
+      -ROT	//  in_msg_body sender_addr msg_value fwd_fee
+      burn_stables CALLDICT
+    }>	//  in_msg_body msg_value fwd_fee sender_addr
+    4 BLKDROP	// 
+  }>
+  get_wallet_data PROC:<{
+    // 
+    load_data CALLDICT	//  _1 _2 _3 _4
+  }>
+}END>c
+boc>B "build/boc/wallet-contract.boc" B>file
