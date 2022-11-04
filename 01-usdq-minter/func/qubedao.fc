@@ -1,7 +1,7 @@
 ;; SC for exchanging TON <-> USDQ:TON.
 ;; - Compliant with 'Fungible tokens (Jettons) standard'
 ;;       at https://github.com/ton-blockchain/TIPs/issues/74
-;; (c) ProgramCrafter, 2022
+;; (c) ProgramCrafter, 2022. All rights reserved.
 
 #include "func/usdq-as-jetton-wallet-code.fc";
 #include "func/usdq-as-jetton.fc";
@@ -89,7 +89,7 @@ slice get_wallet_address(slice owner_address) method_id {
        {-  message body starts here  -}
     .store_uint(1, 32)              {-  burning USDQ  -}
     .store_uint(balance_nusdq, 64)  {-     amount     -}
-    .end_cell(), 0
+    .end_cell(), 2
   );
   
   send_raw_message(begin_cell()
@@ -99,7 +99,7 @@ slice get_wallet_address(slice owner_address) method_id {
     .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
        {-  message body starts here  -}
     .store_uint(1, 32)              {-   burning QBD   -}
-    .end_cell(), 0
+    .end_cell(), 2
   );
 }
 
@@ -115,7 +115,7 @@ slice get_wallet_address(slice owner_address) method_id {
     .store_uint(4, 3).store_uint(0, 8).store_uint(addr, 256)
     .store_coins(amount)
     .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
-    .end_cell(), 0
+    .end_cell(), 2
   );
 }
 
@@ -166,7 +166,7 @@ slice get_wallet_address(slice owner_address) method_id {
     if (balance_nusdq & (balance_nton * musd_p_ton / 1150000 <= balance_nusdq)) {
       destroy(fine_user_addr, balance_nton, balance_nusdq);
       users~udict_delete?(256, fine_user_addr);
-    } else {
+    } else if (percents_cur_nton >= 100000000) {  ;; 0.1 TON
       percents += percents_cur_nton;
       
       users~udict_set_builder(256, fine_user_addr,
@@ -174,11 +174,12 @@ slice get_wallet_address(slice owner_address) method_id {
                     .store_uint(balance_nusdq, 64)
                     .store_uint(last_update, 64));
     }
+    ;; otherwise skip updating this user
     
     (fine_user_addr, fine_user_data, success) = udict_get_next?(users, 256, fine_user_addr);
   }
   
-  if (percents > 10000) {
+  if (percents) {
     send_ton(liquidity_pool_addr(), percents);
   }
   
@@ -335,10 +336,4 @@ slice get_wallet_address(slice owner_address) method_id {
   }
 }
 
-() recv_external(slice in_msg) impure {
-  [int balance, _] = get_balance();
-  
-  if (balance <= 100000000) {  ;; balance <= 0.1 TON
-    accept_message();
-  }
-}
+;; deploying only by internal messages
